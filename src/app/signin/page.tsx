@@ -5,6 +5,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 
 const GoogleSignInButton = () => {
   const { data: session } = useSession();
+  console.log(session)
   if (session) {
     return (
       <>
