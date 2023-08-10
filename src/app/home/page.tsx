@@ -1,6 +1,10 @@
+'use client'
 import Link from "next/link";
-
+import {useSession} from "next-auth/react"
+import { useSearchParams } from 'next/navigation'
 export default function Page() {
+  const{data: session}=useSession()
+  console.log(session)
   return (
     <div className="text-center bg-slate-600 h-screen flex flex-col justify-center w-2/3 mx-auto ">
       <p>

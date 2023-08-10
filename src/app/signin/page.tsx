@@ -1,8 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-// import  signIn  from 'next-auth/react'
 import { useSession, signOut, signIn } from "next-auth/react";
-
 const GoogleSignInButton = () => {
   const { data: session } = useSession();
   console.log(session)
