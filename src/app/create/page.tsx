@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const InitialState = {
   title: "",
@@ -10,6 +11,8 @@ const InitialState = {
 
 export default function Index() {
   const [formData, setFormData] = useState(InitialState);
+  const {data:session}=useSession()
+  console.log(session?.user)
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
@@ -20,7 +23,7 @@ export default function Index() {
     
     const response=await fetch('/api/post',{
         method:'POST',
-        body:JSON.stringify(formData)
+        body:JSON.stringify({...formData,session})
     })
     console.log(response)
   };
