@@ -1,13 +1,24 @@
 import { NextResponse,NextRequest } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next"
 import connectMongo from '../../../utils/connectMongo'
 import Blog from "@/models/BlogModel";
 import clientPromise from "@/utils/mongoClient";
 
-export async function GET(){
-    const res=await fetch('https://jsonplaceholder.typicode.com/posts')
-    const data=await res.json()
-    console.log(data)
-    return NextResponse.json(data)
+export async function GET(req:NextRequest,res:NextResponse){
+    const session=await getServerSession(req,res,authOptions)
+    console.log(session)
+    // if(session){
+    //   return  NextResponse.json({
+    //         content:"Session found"
+    //     })
+    // }else{
+    //    return NextResponse.json({
+    //         content:"No session found"
+    //     })
+    // }
+    // console.log(req)
+    return NextResponse.json("send")
 }
 
 export async function POST(req:NextRequest){
