@@ -15,7 +15,7 @@ export default function Blogs() {
     <div className="h-screen">
       <h2>Blogs</h2>
       <button onClick={fetchData}>Fetch</button>
-      <button onClick={postData}>Post</button>
+      {/* <button onClick={postData}>Post</button> */}
     </div>
   );
 }
