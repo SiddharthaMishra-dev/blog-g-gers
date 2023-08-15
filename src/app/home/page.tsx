@@ -21,8 +21,8 @@ export default function Page() {
         </p>
 
         <Link href="/blogs">
-          <Button>
-            Blogs
+          <Button size="lg">
+            Discover
           </Button>
         </Link>
       </div>
