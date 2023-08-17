@@ -28,6 +28,7 @@ export async function POST(req:NextRequest){
         title:data.title,
         hashtags:data.hashtags,
         content:data.content,
+        likes:data.likes,
         userId:reqUser?._id
     })
     console.log("connected to DB")
@@ -39,4 +40,14 @@ export async function POST(req:NextRequest){
     // })
     // const response=await blog.save()
     return NextResponse.json("Send")
+}
+
+
+export async function PATCH(req:NextRequest,res:NextResponse){
+    const json=await req.json()
+    const client =await clientPromise
+    const db=client.db('Users')  
+    const reqUser=await db.collection('users').findOne(json.user)
+    await db.collection('blogs').updateOne({userId:reqUser?._id},{$push:{likes:reqUser}})
+    return NextResponse.json("received")
 }

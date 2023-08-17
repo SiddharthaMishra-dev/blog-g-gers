@@ -7,9 +7,3 @@ export async function GET(req:NextRequest,res:NextResponse){
     return NextResponse.json(reqRes)
 }
 
-export async function PATCH(req:NextRequest,res:NextResponse){
-    const client=await clientPromise;
-    const json=await req.json()
-    console.log(json)
-    return NextResponse.json("received")
-}

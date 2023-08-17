@@ -21,10 +21,10 @@ export default function Blogs() {
     console.log(response);
   };
 
-  const handleLike=async(event)=>{
-    const response=await fetch("/api/blogs",{
+  const handleLike=async(event: Event)=>{
+    const response=await fetch("/api/user",{
       method:"PATCH",
-      body:JSON.stringify("THis is the data")
+      body:JSON.stringify(session)
     })
     const data=await response.json()
     console.log(data)
@@ -32,7 +32,7 @@ export default function Blogs() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [blogs]);
   return (
     <div className="h-screen w-full p-4 flex flex-col  items-center">
       <h2 className="text-5xl">Blogs</h2>
@@ -48,6 +48,7 @@ export default function Blogs() {
                     <Button isIconOnly onClick={handleLike}>
                       <FaRegHeart/>
                     </Button>
+                    {blog.likes.length}
                   </CardFooter>
                 </Card>
               </li>
