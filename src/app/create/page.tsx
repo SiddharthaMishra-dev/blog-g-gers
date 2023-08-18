@@ -13,7 +13,6 @@ const InitialState = {
 export default function Index() {
   const [formData, setFormData] = useState(InitialState);
   const {data:session}=useSession()
-  console.log(session?.user)
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));

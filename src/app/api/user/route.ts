@@ -11,7 +11,7 @@ export async function GET(req:NextRequest,res:NextResponse){
     const db=client.db('Users')
     const reqUser=await db.collection('users').findOne(session.user)
     const reqBlogs=await db.collection('blogs').find({"userId":reqUser?._id}).toArray()
-    // console.log(reqBlogs)
+    console.log(reqBlogs)
     return NextResponse.json(reqBlogs)
 }
 
@@ -32,22 +32,16 @@ export async function POST(req:NextRequest){
         userId:reqUser?._id
     })
     console.log("connected to DB")
-    // console.log(data)
-    // const blog=new Blog({
-    //     title:data.title,
-    //     hashTags:data.hashTags,
-    //     content:data.content
-    // })
-    // const response=await blog.save()
     return NextResponse.json("Send")
 }
 
 
-export async function PATCH(req:NextRequest,res:NextResponse){
+export async function PUT(req:NextRequest,res:NextResponse){
     const json=await req.json()
+    console.log(json)
     const client =await clientPromise
     const db=client.db('Users')  
-    const reqUser=await db.collection('users').findOne(json.user)
-    await db.collection('blogs').updateOne({userId:reqUser?._id},{$push:{likes:reqUser}})
+    // const reqUser=await db.collection('users').findOne(json.session.user)
+    // await db.collection('blogs').updateOne({userId:reqUser?._id},json.blog)
     return NextResponse.json("received")
 }
