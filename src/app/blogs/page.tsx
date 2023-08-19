@@ -23,13 +23,13 @@ export default function Blogs() {
   };
 
   const handleLike = async (blog) => {
-    blog.likes.push(session?.user?.email)
-    console.log(blog)
+    blog.likes.push(session?.user?.email);
+    console.log(blog);
     // setBlog(blog)
-    const form={
-      session:session,
-      blog:blog
-    }
+    const form = {
+      session: session,
+      blog: blog,
+    };
     const response = await fetch("/api/user", {
       method: "PUT",
       body: JSON.stringify(form),
@@ -53,7 +53,7 @@ export default function Blogs() {
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                   <CardBody className="p-4">{blog.content}</CardBody>
                   <CardFooter className="p-4">
-                    <Button isIconOnly onClick={()=>handleLike(blog)}>
+                    <Button isIconOnly onClick={() => handleLike(blog)}>
                       <FaRegHeart />
                     </Button>
                     <span className="ml-2">{blog.likes.length}</span>

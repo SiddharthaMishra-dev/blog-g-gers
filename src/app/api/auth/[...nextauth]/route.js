@@ -7,12 +7,12 @@ import User from "@/models/UserModel";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/utils/mongoClient";
 
-export const authOptions  = {
-  secret:process.env.MY_SECRET,
+export const authOptions = {
+  secret: process.env.MY_SECRET,
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   pages: {
@@ -30,7 +30,6 @@ export const authOptions  = {
   session: {
     strategy: "jwt",
   },
- 
 };
 
 const handler = NextAuth(authOptions);

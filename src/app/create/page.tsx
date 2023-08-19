@@ -7,25 +7,25 @@ const InitialState = {
   title: "",
   hashtags: "",
   content: "",
-  likes:[],
+  likes: [],
 };
 
 export default function Index() {
   const [formData, setFormData] = useState(InitialState);
-  const {data:session}=useSession()
+  const { data: session } = useSession();
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
-  const handleSubmit = async(e:any) => {
-    e.preventDefault()
-    
-    const response=await fetch('/api/user',{
-        method:'POST',
-        body:JSON.stringify({...formData,session})
-    })
-    console.log(response)
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/user", {
+      method: "POST",
+      body: JSON.stringify({ ...formData, session }),
+    });
+    console.log(response);
   };
 
   return (
@@ -64,9 +64,7 @@ export default function Index() {
             />
           </div>
           <div>
-            <button  onClick={handleSubmit}>
-              Submit
-            </button>
+            <button onClick={handleSubmit}>Submit</button>
           </div>
         </div>
       </form>

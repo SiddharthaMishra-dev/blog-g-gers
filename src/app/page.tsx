@@ -11,9 +11,7 @@ export default function Home() {
       <h2 className="mt-2 text-2xl text-gray-200"> Share, who you are</h2>
       <Link href="/blogs">
         <Button color="primary" size="lg" className="mt-4 ">
-          <span className="text-lg text-bold">
-          Discover
-            </span>
+          <span className="text-lg text-bold">Discover</span>
         </Button>
       </Link>
     </main>

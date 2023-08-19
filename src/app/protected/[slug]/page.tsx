@@ -11,9 +11,9 @@ export default function User() {
     const json = await response.json();
     console.log(json);
   };
-  useEffect(()=>{
+  useEffect(() => {
     fetchBlogs();
-  },[blogs])
+  }, [blogs]);
   return (
     <>
       <div className="h-screen w-full p-4 flex flex-col  items-center">
