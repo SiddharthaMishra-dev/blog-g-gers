@@ -2,7 +2,6 @@
 import Link from "next/link";
 import {useSession} from "next-auth/react"
 import {Button} from "@nextui-org/react"
-import { useSearchParams } from 'next/navigation'
 export default function Page() {
   const{data: session}=useSession()
   console.log(session)
