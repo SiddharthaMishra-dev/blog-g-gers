@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { Button, Input, Textarea } from "@nextui-org/react";
 
 const InitialState = {
   title: "",
@@ -26,25 +27,31 @@ export default function Index() {
       body: JSON.stringify({ ...formData, session }),
     });
     console.log(response);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setFormData(InitialState);
   };
 
   return (
     <div>
       <form>
-        <div className="w-full">
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+          <h2 className="text-2xl font-bold">Jot down your thought</h2>
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Title</label>
-            <input
+            <Input
               placeholder="title"
               name="title"
-              className="text-black p-2 text-lg"
+              className="text-black p-2 text-lg rounded-md"
               value={formData.title}
               onChange={handleChange}
             />
           </div>
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Hastags</label>
-            <input
+            <Input
               placeholder="hashtags"
               name="hashtags"
               className="text-black p-2 text-lg"
@@ -54,7 +61,7 @@ export default function Index() {
           </div>
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Content</label>
-            <textarea
+            <Textarea
               rows={20}
               cols={40}
               name="content"
@@ -64,7 +71,9 @@ export default function Index() {
             />
           </div>
           <div>
-            <button onClick={handleSubmit}>Submit</button>
+            <Button color="primary" size="lg" onClick={handleSubmit}>
+              Submit
+            </Button>
           </div>
         </div>
       </form>
