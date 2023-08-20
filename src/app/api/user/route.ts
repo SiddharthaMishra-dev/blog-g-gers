@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
+import { ObjectId } from "mongodb";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
-import connectMongo from "../../../utils/connectMongo";
 import clientPromise from "@/utils/mongoClient";
 import { getSession } from "next-auth/react";
 
@@ -40,10 +40,17 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest, res: NextResponse) {
   const json = await req.json();
-  console.log(json);
   const client = await clientPromise;
   const db = client.db("Users");
-  // const reqUser=await db.collection('users').findOne(json.session.user)
-  // await db.collection('blogs').updateOne({userId:reqUser?._id},json.blog)
+  const reqBlog = await db
+    .collection("blogs")
+    .findOne({ _id: new ObjectId(json.blog?._id) });
+  await db
+    .collection("blogs")
+    .updateOne(
+      { _id: reqBlog?._id },
+      { $set: { ...json.blog, _id: reqBlog?._id } }
+    );
+
   return NextResponse.json("received");
 }
