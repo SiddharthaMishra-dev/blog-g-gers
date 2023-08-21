@@ -56,7 +56,7 @@ export default function Blogs() {
                     <Button isIconOnly onClick={() => handleLike(blog)}>
                       <FaRegHeart />
                     </Button>
-                    <span className="ml-2">{blog.likes.length}</span>
+                    <span className="ml-2">{blog?.likes.length}</span>
                   </CardFooter>
                 </Card>
               </li>
