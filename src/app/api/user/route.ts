@@ -7,24 +7,19 @@ import { getSession } from "next-auth/react";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const session = await getServerSession(authOptions);
-  // console.log(session);
   const client = await clientPromise;
   const db = client.db("Users");
   const reqUser = await db.collection("users").findOne(session.user);
-  console.log(reqUser);
-
-  const allBlogs = await db
+  const reqBlogs = await db
     .collection("blogs")
-    .findOne({ userId: new ObjectId(reqUser?._id) });
-  console.log(allBlogs);
+    .find({ userId: new ObjectId(reqUser?._id).toString() })
+    .toArray();
 
-  return NextResponse.json("received");
+  return NextResponse.json(reqBlogs);
 }
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
-  // console.log(data.session.user)
-  // console.log(data)
   console.log("connecting to mongodb");
   const client = await clientPromise;
   const db = client.db("Users");

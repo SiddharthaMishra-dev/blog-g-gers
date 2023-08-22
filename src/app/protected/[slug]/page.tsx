@@ -2,6 +2,13 @@
 
 import { useSession } from "next-auth/react";
 import { useState, useEffect, use } from "react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  Button,
+} from "@nextui-org/react";
 
 export default function User() {
   const { data: session } = useSession();
@@ -9,7 +16,7 @@ export default function User() {
   const fetchBlogs = async () => {
     const response = await fetch("/api/user");
     const json = await response.json();
-    console.log(json);
+    setBlogs(json);
   };
   useEffect(() => {
     fetchBlogs();
@@ -18,6 +25,24 @@ export default function User() {
     <>
       <div className="h-screen w-full p-4 flex flex-col  items-center">
         <h2>Hey {session?.user?.name}</h2>
+        {blogs.length !== 0 ? (
+          <>
+            <ul className="flex flex-col items-center p-3">
+              {blogs.map((blog) => (
+                <li key={blog?._id} className="w-2/3">
+                  <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 ">
+                    <CardHeader className="text-2xl p-4">
+                      {blog.title}
+                    </CardHeader>
+                    <CardBody className="p-4">{blog.content}</CardBody>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
