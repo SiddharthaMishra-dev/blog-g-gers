@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 const Appbar = () => {
   const { data: session } = useSession();
   return (
-    <Navbar className="bg-inherit">
+    <Navbar className="bg-inherit w-full">
       <NavbarBrand>
         <p className="font-bold text-inherit">blog-g-gers</p>
       </NavbarBrand>
@@ -37,11 +37,23 @@ const Appbar = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         {session ? (
-          <NavbarItem>
-            <Button as={Link} color="primary" href="#" variant="flat">
-              Log out
-            </Button>
-          </NavbarItem>
+          <>
+            <NavbarItem>
+              <Button
+                as={Link}
+                color="primary"
+                href={`/protected/${session.user?.name}`}
+                variant="flat"
+              >
+                Dashboard
+              </Button>
+            </NavbarItem>
+            <NavbarItem>
+              <Button as={Link} color="primary" href="#" variant="flat">
+                Log out
+              </Button>
+            </NavbarItem>
+          </>
         ) : (
           <NavbarItem className="hidden lg:flex">
             <Link href="/signin">Sign in</Link>

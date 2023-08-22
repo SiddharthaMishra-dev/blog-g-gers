@@ -7,15 +7,18 @@ import { getSession } from "next-auth/react";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const session = await getServerSession(authOptions);
+  // console.log(session);
   const client = await clientPromise;
   const db = client.db("Users");
   const reqUser = await db.collection("users").findOne(session.user);
-  const reqBlogs = await db
+  console.log(reqUser);
+
+  const allBlogs = await db
     .collection("blogs")
-    .find({ userId: reqUser?._id })
-    .toArray();
-  console.log(reqBlogs);
-  return NextResponse.json(reqBlogs);
+    .findOne({ userId: new ObjectId(reqUser?._id) });
+  console.log(allBlogs);
+
+  return NextResponse.json("received");
 }
 
 export async function POST(req: NextRequest) {
