@@ -5,7 +5,9 @@ import { NextUIProvider } from "@nextui-org/react";
 export default function Provider({ children }: any) {
   return (
     <NextUIProvider>
-      <SessionProvider>{children}</SessionProvider>
+      <SessionProvider>
+        <main className="dark">{children}</main>
+      </SessionProvider>
     </NextUIProvider>
   );
 }

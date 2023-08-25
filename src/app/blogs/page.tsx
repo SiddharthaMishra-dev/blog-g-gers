@@ -1,7 +1,13 @@
 "use client";
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  Chip,
+} from "@nextui-org/react";
 import { FaRegHeart } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 
@@ -22,7 +28,7 @@ export default function Blogs() {
     console.log(response);
   };
 
-  const handleLike = async (blog) => {
+  const handleLike = async (blog: any) => {
     blog.likes.push(session?.user?.email);
     console.log(blog);
     // setBlog(blog)
@@ -43,13 +49,14 @@ export default function Blogs() {
   }, [blogs]);
   return (
     <div className="h-screen w-full p-4 flex flex-col  items-center">
-      <h2 className="text-5xl">Blogs</h2>
+      {/* <h2 className="text-5xl bg-slate-800 p-4 ">Blogs</h2> */}
+
       {blogs.length !== 0 ? (
         <>
           <ul className="flex flex-col items-center p-3">
-            {blogs.map((blog) => (
-              <li key={blog?._id} className="w-2/3">
-                <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 ">
+            {blogs.map((blog: any) => (
+              <li key={blog?._id} className="w-1/3">
+                <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 drop-shadow-2xl ">
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                   <CardBody className="p-4">{blog.content}</CardBody>
                   <CardFooter className="p-4">

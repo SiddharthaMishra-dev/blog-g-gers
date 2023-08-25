@@ -10,13 +10,16 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
+import { FiEdit } from "react-icons/fi";
 
 const Appbar = () => {
   const { data: session } = useSession();
   return (
-    <Navbar className="bg-inherit w-full">
+    <Navbar className="bg-inherit" maxWidth="full">
       <NavbarBrand>
-        <p className="font-bold text-inherit">blog-g-gers</p>
+        <Link href="/">
+          <p className="font-bold text-inherit">blog-g-gers</p>
+        </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {/* <NavbarItem>
@@ -38,6 +41,11 @@ const Appbar = () => {
       <NavbarContent justify="end">
         {session ? (
           <>
+            <NavbarItem>
+              <Button as={Link} color="primary" href={"/create"} variant="flat">
+                <FiEdit />
+              </Button>
+            </NavbarItem>
             <NavbarItem>
               <Button
                 as={Link}

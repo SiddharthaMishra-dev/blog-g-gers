@@ -42,9 +42,11 @@ export default function Index() {
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Title</label>
             <Input
+              color="primary"
+              size="lg"
               placeholder="title"
               name="title"
-              className="text-black p-2 text-lg rounded-md"
+              className=" p-2 text-lg "
               value={formData.title}
               onChange={handleChange}
             />
@@ -52,9 +54,10 @@ export default function Index() {
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Hastags</label>
             <Input
+              size="lg"
               placeholder="hashtags"
               name="hashtags"
-              className="text-black p-2 text-lg"
+              className=" p-2 text-2xl"
               value={formData.hashtags}
               onChange={handleChange}
             />
@@ -62,10 +65,12 @@ export default function Index() {
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Content</label>
             <Textarea
+              color="primary"
+              size="lg"
               rows={20}
               cols={40}
               name="content"
-              className="text-black p-2 text-lg"
+              className="p-2 text-lg"
               value={formData.content}
               onChange={handleChange}
             />
