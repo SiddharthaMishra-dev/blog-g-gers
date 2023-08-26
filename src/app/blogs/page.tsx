@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/react";
 import { FaRegHeart } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import { Blog } from "@/models/UserModel";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -54,7 +55,7 @@ export default function Blogs() {
       {blogs.length !== 0 ? (
         <>
           <ul className="flex flex-col items-center p-3">
-            {blogs.map((blog: any) => (
+            {blogs.map((blog: Blog) => (
               <li key={blog?._id} className="w-1/3">
                 <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 drop-shadow-2xl ">
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>

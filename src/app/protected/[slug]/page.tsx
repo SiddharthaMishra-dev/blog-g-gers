@@ -9,6 +9,7 @@ import {
   CardFooter,
   Button,
 } from "@nextui-org/react";
+import { Blog } from "@/models/UserModel";
 
 export default function User() {
   const { data: session } = useSession();
@@ -17,6 +18,7 @@ export default function User() {
     const response = await fetch("/api/user");
     const json = await response.json();
     setBlogs(json);
+    console.log(blogs);
   };
   useEffect(() => {
     fetchBlogs();
@@ -28,7 +30,7 @@ export default function User() {
         {blogs.length !== 0 ? (
           <>
             <ul className="flex flex-col items-center p-3">
-              {blogs.map((blog) => (
+              {blogs.map((blog: Blog) => (
                 <li key={blog?._id} className="w-2/3">
                   <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 ">
                     <CardHeader className="text-2xl p-4">
