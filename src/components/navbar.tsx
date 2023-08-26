@@ -9,7 +9,7 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { FiEdit } from "react-icons/fi";
 
 const Appbar = () => {
@@ -57,14 +57,21 @@ const Appbar = () => {
               </Button>
             </NavbarItem>
             <NavbarItem>
-              <Button as={Link} color="primary" href="#" variant="flat">
+              <Button
+                as={Link}
+                color="primary"
+                variant="flat"
+                onClick={() => signOut({ callbackUrl: "/" })}
+              >
                 Log out
               </Button>
             </NavbarItem>
           </>
         ) : (
           <NavbarItem className="hidden lg:flex">
-            <Link href="/signin">Sign in</Link>
+            <Button as={Link} color="primary" variant="flat" href="/signin">
+              Sign In
+            </Button>
           </NavbarItem>
         )}
       </NavbarContent>

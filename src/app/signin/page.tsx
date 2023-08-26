@@ -47,7 +47,11 @@ const GoogleSignInButton = () => {
         <Card>
           <CardBody className="">
             <div className="p-5">
-              <Image src={image} alt="rocket " width={300} height={200} />
+              {/* <Image src={image} alt="rocket " width={300} height={200} /> */}
+              <img
+                src="https://media4.giphy.com/media/HrRvnN7NuJy4InG4MV/giphy.gif?cid=ecf05e47eq49eny9vfl658ypap8ghp1jerrc19nzup2lcnzb&ep=v1_stickers_search&rid=giphy.gif&ct=s"
+                alt="login animation"
+              />
             </div>
             <Button
               color="primary"
