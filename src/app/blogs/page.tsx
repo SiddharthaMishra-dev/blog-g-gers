@@ -1,19 +1,15 @@
 "use client";
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardFooter,
-  Chip,
-} from "@nextui-org/react";
+import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/react";
 import { FaRegHeart } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { Blog } from "@/models/UserModel";
+import { useRouter } from "next/navigation";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const router = useRouter();
   // const [blog, setBlog] = useState();
   const { data: session } = useSession();
   const fetchData = async () => {
@@ -21,28 +17,25 @@ export default function Blogs() {
     const data = await response.json();
     setBlogs(data);
   };
-  const postData = async () => {
-    const response = await fetch("/api/post", {
-      method: "POST",
-      body: JSON.stringify({ Name: "Sid" }),
-    });
-    console.log(response);
-  };
 
-  const handleLike = async (blog: any) => {
-    blog.likes.push(session?.user?.email);
-    console.log(blog);
-    // setBlog(blog)
-    const form = {
-      session: session,
-      blog: blog,
-    };
-    const response = await fetch("/api/user", {
-      method: "PUT",
-      body: JSON.stringify(form),
-    });
-    const data = await response.json();
-    console.log(data);
+  const handleLike = async (blog: Blog) => {
+    if (!session) {
+      router.push("/signin");
+    } else {
+      blog.likes.push(session?.user?.email);
+      console.log(blog);
+      // setBlog(blog)
+      const form = {
+        session: session,
+        blog: blog,
+      };
+      const response = await fetch("/api/user", {
+        method: "PUT",
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+      console.log(data);
+    }
   };
 
   useEffect(() => {

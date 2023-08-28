@@ -1,10 +1,11 @@
 import NextAuth, { Awaitable, RequestInternal } from "next-auth";
 // import type { NextAuthOptions } from 'next-auth'
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
-import connectMongo from "@/utils/connectMongo";
-import User from "@/models/UserModel";
+// import CredentialsProvider from "next-auth/providers/credentials";
+// import connectMongo from "@/utils/connectMongo";
+// import User from "@/models/UserModel";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoClient } from "mongodb";
 import clientPromise from "@/utils/mongoClient";
 
 export const authOptions = {

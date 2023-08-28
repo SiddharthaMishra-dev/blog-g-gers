@@ -77,7 +77,7 @@ export default function Index() {
           </div>
           <div>
             <Button color="primary" size="lg" onClick={handleSubmit}>
-              Submit
+              Post
             </Button>
           </div>
         </div>
