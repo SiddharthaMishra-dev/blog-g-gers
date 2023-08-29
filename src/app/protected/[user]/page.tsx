@@ -1,7 +1,8 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import {
   Card,
   CardBody,
@@ -10,22 +11,33 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Blog } from "@/models/UserModel";
+import { FaEdit } from "react-icons/fa";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function User() {
   const { data: session } = useSession();
   const [blogs, setBlogs] = useState([]);
+  const [fetchingBlogs, setFetchingBlogs] = useState(false);
+  const params = useParams();
+
   const fetchBlogs = async () => {
-    const response = await fetch("/api/user");
-    const json = await response.json();
-    setBlogs(json);
-    console.log(blogs);
+    try {
+      setFetchingBlogs(true);
+      const response = await fetch("/api/user");
+      const json = await response.json();
+      setFetchingBlogs(false);
+      setBlogs(json);
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     fetchBlogs();
-  }, [blogs]);
+  }, []);
   return (
     <>
-      <div className="h-screen w-full p-4 flex flex-col  items-center">
+      <div className="h-full w-full p-4 flex flex-col  items-center">
         <h2>Hey {session?.user?.name}</h2>
         {blogs.length !== 0 ? (
           <>
@@ -37,6 +49,15 @@ export default function User() {
                       {blog.title}
                     </CardHeader>
                     <CardBody className="p-4">{blog.content}</CardBody>
+                    <CardFooter>
+                      <Button
+                        as={Link}
+                        color="primary"
+                        href={`/protected/${params.user}/${blog._id}`}
+                      >
+                        <FaEdit />
+                      </Button>
+                    </CardFooter>
                   </Card>
                 </li>
               ))}

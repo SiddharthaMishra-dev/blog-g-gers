@@ -42,7 +42,7 @@ export default function Blogs() {
     fetchData();
   }, [blogs]);
   return (
-    <div className="h-screen w-full p-4 flex flex-col  items-center">
+    <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
       {/* <h2 className="text-5xl bg-slate-800 p-4 ">Blogs</h2> */}
 
       {blogs.length !== 0 ? (
