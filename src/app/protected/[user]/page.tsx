@@ -37,7 +37,7 @@ export default function User() {
   }, []);
   return (
     <>
-      <div className="h-full w-full p-4 flex flex-col  items-center">
+      <div className="min-h-screen w-full p-4 flex flex-col  items-center">
         <h2>Hey {session?.user?.name}</h2>
         {blogs.length !== 0 ? (
           <>
