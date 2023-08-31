@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { Button, Input, Textarea } from "@nextui-org/react";
 
 const InitialState = {
@@ -28,6 +28,23 @@ const Page = () => {
       const json = await response.json();
       // console.log(json);
       setFormData({ ...json });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      let url = `/api/user/${params.blogId}`;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const json = await response.json();
+      if (json === "updated") {
+        redirect(`/protected/${params.user}`);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -80,7 +97,7 @@ const Page = () => {
               />
             </div>
             <div>
-              <Button color="primary" size="lg">
+              <Button color="primary" size="lg" onClick={handleSubmit}>
                 Edit
               </Button>
             </div>
