@@ -42,9 +42,6 @@ const Page = () => {
         body: JSON.stringify(formData),
       });
       const json = await response.json();
-      if (json === "updated") {
-        redirect(`/protected/${params.user}`);
-      }
     } catch (err) {
       console.log(err);
     }

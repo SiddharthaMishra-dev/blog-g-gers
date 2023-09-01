@@ -21,6 +21,12 @@ export async function PUT(
 ) {
   const id = params.id;
   const json = await req.json();
+  if (json?._id) {
+    json._id = new ObjectId(json._id);
+  }
+  if (json?.userId) {
+    json.userId = new ObjectId(json.userId);
+  }
   const client = await clientPromise;
   const db = client.db("Users");
   const reqBlog = await db
