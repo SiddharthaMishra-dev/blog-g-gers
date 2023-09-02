@@ -13,7 +13,7 @@ const GoogleSignInButton = () => {
   }
   return (
     <>
-      <h1 className="text-3xl w-1/2 text-center mb-16 bg-blue-700 text-white p-2 mx-auto skew-y-3">
+      <h1 className="text-3xl w-1/2 text-center mt-16 mb-16 bg-blue-700 text-white p-2 mx-auto skew-y-3">
         Join blog-g-gers now !
       </h1>
       <div className="w-full flex justify-center items-center">

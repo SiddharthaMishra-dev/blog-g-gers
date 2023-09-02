@@ -32,6 +32,7 @@ export async function POST(req: NextRequest) {
     content: data.content,
     likes: data.likes,
     userId: reqUser?._id,
+    username: data.session.user.name,
   });
   console.log("connected to DB");
   return NextResponse.json("Send");

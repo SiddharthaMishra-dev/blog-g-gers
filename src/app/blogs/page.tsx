@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@nextui-org/react";
+import { Button, Chip } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/react";
 import { FaRegHeart } from "react-icons/fa";
@@ -49,15 +49,27 @@ export default function Blogs() {
         <>
           <ul className="flex flex-col items-center p-3">
             {blogs.map((blog: Blog) => (
-              <li key={blog?._id} className="w-1/3">
+              <li key={blog?._id} className="w-4/5">
                 <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 drop-shadow-2xl ">
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                   <CardBody className="p-4">{blog.content}</CardBody>
-                  <CardFooter className="p-4">
-                    <Button isIconOnly onClick={() => handleLike(blog)}>
-                      <FaRegHeart />
-                    </Button>
-                    <span className="ml-2">{blog?.likes.length}</span>
+                  <CardFooter className="p-4 flex justify-between">
+                    <div>
+                      <Button
+                        size="lg"
+                        isIconOnly
+                        color="danger"
+                        onClick={() => handleLike(blog)}
+                      >
+                        <FaRegHeart />
+                      </Button>
+                      <span className="ml-2">{blog?.likes.length}</span>
+                    </div>
+                    <div>
+                      <Chip size="lg" color="primary">
+                        {blog.username}
+                      </Chip>
+                    </div>
                   </CardFooter>
                 </Card>
               </li>

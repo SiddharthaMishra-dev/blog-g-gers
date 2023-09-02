@@ -18,4 +18,5 @@ export interface Blog {
   title: string;
   userId: string;
   _id: string;
+  username: string;
 }
