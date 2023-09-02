@@ -21,7 +21,6 @@ export default function Index() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
     const response = await fetch("/api/user", {
       method: "POST",
       body: JSON.stringify({ ...formData, session }),

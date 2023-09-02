@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider>
-          <Appbar />
-          {children}
+          <div className="h-screen overflow-auto">
+            <Appbar />
+            <div className="">{children}</div>
+          </div>
         </Provider>
       </body>
     </html>

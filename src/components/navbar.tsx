@@ -15,7 +15,7 @@ import { FiEdit } from "react-icons/fi";
 const Appbar = () => {
   const { data: session } = useSession();
   return (
-    <Navbar className="bg-inherit" maxWidth="full">
+    <Navbar className="bg-inherit h-[75px]" maxWidth="full">
       <NavbarBrand>
         <Link href="/">
           <p className="font-bold text-inherit">blog-g-gers</p>

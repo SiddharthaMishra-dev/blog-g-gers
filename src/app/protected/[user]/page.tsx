@@ -38,13 +38,14 @@ export default function User() {
   }, []);
   return (
     <>
-      <div className="min-h-screen w-full p-4 flex flex-col  items-center">
-        <h2>Hey {session?.user?.name}</h2>
+      <div className=" w-full p-4 flex flex-col  items-center">
+        <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
         {blogs.length !== 0 ? (
           <>
             <ul className="flex flex-col items-center p-3">
+              <h4 className="text-xl text-blue-700">Your Blogs</h4>
               {blogs.map((blog: Blog) => (
-                <li key={blog?._id} className="w-2/3">
+                <li key={blog?._id} className="w-2/5 mt-5">
                   <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 ">
                     <CardHeader className="text-2xl p-4">
                       {blog.title}
