@@ -22,26 +22,35 @@ export default function Blogs() {
   const handleLike = async (blog: Blog) => {
     if (!session) {
       router.push("/signin");
-    } else {
-      blog.likes.push(session?.user?.email);
-      const form = {
-        session: session,
-        blog: blog,
-      };
+    }
+
+    const updatedBlogs = blogs.map((b) => {
+      if (b._id === blog._id) {
+        b.likes.push(session?.user?.email);
+      }
+      return b;
+    });
+    setBlogs(updatedBlogs);
+    const form = {
+      session: session,
+      blog: blog,
+    };
+    try {
       const response = await fetch("/api/user", {
         method: "PUT",
         body: JSON.stringify(form),
       });
       const data = await response.json();
       console.log(data);
+    } catch (err) {
+      console.log(err);
+      setBlogs(blogs);
     }
   };
 
-  // useCallback(()=>{return (handleLike())},[])
-
   useEffect(() => {
     fetchData();
-  }, [blogs]);
+  }, []);
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
       {/* <h2 className="text-5xl bg-slate-800 p-4 ">Blogs</h2> */}
