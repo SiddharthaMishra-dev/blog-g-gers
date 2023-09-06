@@ -22,7 +22,7 @@ export default function RootLayout({
         <Provider>
           <div className="h-screen overflow-auto">
             <Appbar />
-            <div className="">{children}</div>
+            <div className="h-[calc(100vh-75px)]">{children}</div>
           </div>
         </Provider>
       </body>

@@ -37,38 +37,44 @@ export default function User() {
     fetchBlogs();
   }, []);
   return (
-    <>
-      <div className=" w-full p-4 flex flex-col  items-center">
-        <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
-        {blogs.length !== 0 ? (
-          <>
-            <ul className="flex flex-col items-center p-3">
-              <h4 className="text-xl text-blue-700">Your Blogs</h4>
-              {blogs.map((blog: Blog) => (
-                <li key={blog?._id} className="w-2/5 mt-5">
-                  <Card className="w-full m-4 pl-3 bg-inherit text-cyan-50 ">
-                    <CardHeader className="text-2xl p-4">
-                      {blog.title}
-                    </CardHeader>
-                    <CardBody className="p-4">{blog.content}</CardBody>
-                    <CardFooter>
-                      <Button
-                        as={Link}
-                        color="primary"
-                        href={`/protected/${params.user}/${blog._id}`}
-                      >
-                        <FaEdit />
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
-    </>
+    <div className=" w-full h-full  overflow-auto p-4 flex flex-col  items-center">
+      <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
+      {blogs.length !== 0 ? (
+        <>
+          <ul className="w-full flex flex-col items-center p-3">
+            <h4 className="text-xl text-blue-700">Your Blogs</h4>
+            {blogs.map((blog: Blog) => (
+              <li key={blog?._id} className="mt-5">
+                <Card className="w-[600px]  p-4 text-cyan-50 ">
+                  <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
+                  <CardBody className="p-4">{blog.content}</CardBody>
+                  <CardFooter>
+                    <Button
+                      as={Link}
+                      color="primary"
+                      href={`/protected/${params.user}/${blog._id}`}
+                    >
+                      <FaEdit />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <div className="h-full flex flex-col justify-center items-center">
+          {/* <h2 className="text-2xl"></h2> */}
+          <Button
+            size="lg"
+            color="primary"
+            variant="light"
+            className="text-xl  font-bold hover:scale-125"
+          >
+            Write your first Post
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }

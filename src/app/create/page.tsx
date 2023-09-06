@@ -66,8 +66,8 @@ export default function Index() {
             <Textarea
               color="primary"
               size="lg"
-              rows={20}
-              cols={40}
+              minRows={10}
+              // cols={40}
               name="content"
               className="p-2 text-lg"
               value={formData.content}
