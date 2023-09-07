@@ -23,7 +23,7 @@ export default function Blogs() {
     if (!session) {
       router.push("/signin");
     }
-
+    console.log(blog);
     const updatedBlogs = blogs.map((b) => {
       if (b._id === blog._id) {
         b.likes.push(session?.user?.email);
@@ -53,14 +53,12 @@ export default function Blogs() {
   }, []);
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
-      {/* <h2 className="text-5xl bg-slate-800 p-4 ">Blogs</h2> */}
-
       {blogs.length !== 0 ? (
         <>
           <ul className="flex flex-col items-center justify-center p-3">
             {blogs.map((blog: Blog) => (
-              <li key={blog?._id} className="w-full">
-                <Card className="w-4/5 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
+              <li key={blog?._id} className="w-2/3">
+                <Card className="w-full p-2 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                   <CardBody className="p-4">{blog.content}</CardBody>
                   <CardFooter className="p-4 flex justify-between">

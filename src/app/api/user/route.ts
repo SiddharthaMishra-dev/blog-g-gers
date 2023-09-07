@@ -7,14 +7,15 @@ import { getSession } from "next-auth/react";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const session = await getServerSession(authOptions);
+  // console.log(session);
   const client = await clientPromise;
   const db = client.db("Users");
   const reqUser = await db.collection("users").findOne(session.user);
-
   const reqBlogs = await db
     .collection("blogs")
-    .find({ userId: new ObjectId(reqUser?._id) })
+    .find({ userId: reqUser?._id })
     .toArray();
+  // console.log(reqBlogs);
 
   return NextResponse.json(reqBlogs);
 }
@@ -45,12 +46,16 @@ export async function PUT(req: NextRequest, res: NextResponse) {
   const reqBlog = await db
     .collection("blogs")
     .findOne({ _id: new ObjectId(json.blog?._id) });
-  await db
-    .collection("blogs")
-    .updateOne(
-      { _id: reqBlog?._id },
-      { $set: { ...json.blog, _id: reqBlog?._id } }
-    );
+  await db.collection("blogs").updateOne(
+    { _id: reqBlog?._id },
+    {
+      $set: {
+        ...json.blog,
+        _id: reqBlog?._id,
+        userId: new ObjectId(json.blog.userId),
+      },
+    }
+  );
 
   return NextResponse.json("received");
 }
