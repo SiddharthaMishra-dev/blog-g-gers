@@ -69,7 +69,9 @@ export default function User() {
             size="lg"
             color="primary"
             variant="light"
-            className="text-xl  font-bold hover:scale-125"
+            className="text-xl  font-bold transition ease-in-out hover:scale-110 duration-300"
+            as={Link}
+            href="/create"
           >
             Write your first Post
           </Button>
