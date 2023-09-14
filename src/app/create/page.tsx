@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button, Input, Textarea } from "@nextui-org/react";
+import Snackbar from "./(components)/Snackbar";
 
 const InitialState = {
   title: "",
@@ -13,6 +14,16 @@ const InitialState = {
 
 export default function Index() {
   const [formData, setFormData] = useState(InitialState);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+
+  const showMessage = () => {
+    setSnackbarVisible(true);
+
+    // Hide the Snackbar after a certain duration (e.g., 3 seconds)
+    setTimeout(() => {
+      setSnackbarVisible(false);
+    }, 3000);
+  };
   const { data: session } = useSession();
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -25,7 +36,7 @@ export default function Index() {
       method: "POST",
       body: JSON.stringify({ ...formData, session }),
     });
-    console.log(response);
+    showMessage();
     resetForm();
   };
 
@@ -36,6 +47,7 @@ export default function Index() {
   return (
     <div>
       <form>
+        <Snackbar message="This is a Snackbar message" show={snackbarVisible} />
         <div className="w-full h-screen flex flex-col justify-center items-center">
           <h2 className="text-2xl font-bold">Jot down your thought</h2>
           <div className="p-4 flex flex-col w-3/5 ">
@@ -75,7 +87,7 @@ export default function Index() {
             />
           </div>
           <div>
-            <Button color="primary"  size="lg" onClick={handleSubmit}>
+            <Button color="primary" size="lg" onClick={handleSubmit}>
               Post
             </Button>
           </div>
