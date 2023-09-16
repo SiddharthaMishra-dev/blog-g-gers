@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { Blog } from "@/models/UserModel";
 import { FaEdit } from "react-icons/fa";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default function User() {

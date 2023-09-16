@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { redirect, useParams } from "next/navigation";
 import { Button, Input, Textarea } from "@nextui-org/react";
+import Snackbar from "@/components/Snackbar";
 
 const InitialState = {
   title: "",
@@ -18,6 +19,16 @@ const Page = () => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
   };
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+
+  const showMessage = () => {
+    setSnackbarVisible(true);
+
+    // Hide the Snackbar after a certain duration (e.g., 3 seconds)
+    setTimeout(() => {
+      setSnackbarVisible(false);
+    }, 3000);
+  };
   const fetchBlog = async () => {
     try {
       let url = `/api/user/${params.blogId}`;
@@ -26,7 +37,6 @@ const Page = () => {
         headers: { "Content-Type": "application/json" },
       });
       const json = await response.json();
-      // console.log(json);
       setFormData({ ...json });
     } catch (err) {
       console.log(err);
@@ -42,6 +52,7 @@ const Page = () => {
         body: JSON.stringify(formData),
       });
       const json = await response.json();
+      showMessage();
     } catch (err) {
       console.log(err);
     }
@@ -55,6 +66,11 @@ const Page = () => {
     <>
       <div>
         <form>
+          <Snackbar
+            message="Your Blog has been edited"
+            show={snackbarVisible}
+          />
+
           <div className="w-full h-screen flex flex-col justify-center items-center">
             <h2 className="text-2xl font-bold">Jot down your thought</h2>
             <div className="p-4 flex flex-col w-3/5 ">

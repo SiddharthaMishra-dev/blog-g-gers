@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button, Input, Textarea } from "@nextui-org/react";
-import Snackbar from "./(components)/Snackbar";
+import Snackbar from "../../components/Snackbar";
 
 const InitialState = {
   title: "",
@@ -47,7 +47,7 @@ export default function Index() {
   return (
     <div>
       <form>
-        <Snackbar message="This is a Snackbar message" show={snackbarVisible} />
+        <Snackbar message="Your Blog has been posted" show={snackbarVisible} />
         <div className="w-full h-screen flex flex-col justify-center items-center">
           <h2 className="text-2xl font-bold">Jot down your thought</h2>
           <div className="p-4 flex flex-col w-3/5 ">
