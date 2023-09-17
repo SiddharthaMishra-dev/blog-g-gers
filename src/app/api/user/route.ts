@@ -15,8 +15,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
     .collection("blogs")
     .find({ userId: reqUser?._id })
     .toArray();
-  // console.log(reqBlogs);
-
   return NextResponse.json(reqBlogs);
 }
 

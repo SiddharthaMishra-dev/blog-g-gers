@@ -40,3 +40,16 @@ export async function PUT(
     );
   return NextResponse.json("updated");
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = params.id;
+  const client = await clientPromise;
+  const db = client.db("Users");
+  const reqBlog = await db
+    .collection("blogs")
+    .deleteOne({ _id: new ObjectId(id) });
+  return NextResponse.json({ msg: "deleted", status: -1 });
+}
