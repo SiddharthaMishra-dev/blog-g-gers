@@ -51,5 +51,5 @@ export async function DELETE(
   const reqBlog = await db
     .collection("blogs")
     .deleteOne({ _id: new ObjectId(id) });
-  return NextResponse.json({ msg: "deleted", status: -1 });
+  return NextResponse.json({ msg: "deleted", status: 1 });
 }

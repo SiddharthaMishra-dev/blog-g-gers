@@ -1,8 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { redirect, useParams } from "next/navigation";
-import { Button, Input, Textarea } from "@nextui-org/react";
+import { useRouter, redirect, useParams } from "next/navigation";
+import {
+  Button,
+  Input,
+  Textarea,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
 import Snackbar from "@/components/Snackbar";
 
 const InitialState = {
@@ -15,6 +25,9 @@ const InitialState = {
 const Page = () => {
   const params = useParams();
   const [formData, setFormData] = useState(InitialState);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const router = useRouter();
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
@@ -57,6 +70,21 @@ const Page = () => {
       console.log(err);
     }
   };
+  const handleDeleteBlog = async (queryParams) => {
+    const url = `/api/user/${queryParams.blogId}`;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+      if (data.status === 1) {
+        router.push(`/protected/${queryParams.user}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     fetchBlog();
@@ -65,6 +93,31 @@ const Page = () => {
   return (
     <>
       <div>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col text-center gap-1 text-blue-400">
+                  Are you sure
+                </ModalHeader>
+                <ModalBody>
+                  <div className="flex justify-center gap-9">
+                    <Button
+                      color="danger"
+                      variant="flat"
+                      onClick={() => handleDeleteBlog(params)}
+                    >
+                      Yes
+                    </Button>
+                    <Button color="primary" variant="flat">
+                      No
+                    </Button>
+                  </div>
+                </ModalBody>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
         <form>
           <Snackbar
             message="Your Blog has been edited"
@@ -109,9 +162,13 @@ const Page = () => {
                 onChange={handleChange}
               />
             </div>
-            <div>
+            <div className="flex  gap-6">
               <Button color="primary" size="lg" onClick={handleSubmit}>
                 Edit
+              </Button>
+
+              <Button color="danger" size="lg" onPress={onOpen}>
+                Delete your Blog
               </Button>
             </div>
           </div>

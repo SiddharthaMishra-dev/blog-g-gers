@@ -8,11 +8,11 @@ import {
   CardBody,
   CardHeader,
   CardFooter,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
+  // Modal,
+  // ModalContent,
+  // ModalHeader,
+  // ModalBody,
+  // ModalFooter,
   Button,
   useDisclosure,
 } from "@nextui-org/react";
@@ -23,7 +23,7 @@ import Link from "next/link";
 
 export default function User() {
   const { data: session } = useSession();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [blogs, setBlogs] = useState([]);
   const [deleteBlogId, setDeleteBlogId] = useState("");
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
@@ -42,22 +42,6 @@ export default function User() {
     }
   };
 
-  const handleDeleteBlog = async () => {
-    const url = `/api/user/${deleteBlogId}`;
-    console.log(deleteBlogId);
-    console.log(url);
-    // try {
-    //   const response = await fetch(url, {
-    //     method: "DELETE",
-    //     headers: { "Content-Type": "application/json" },
-    //   });
-    //   const data = await response.json();
-    //   console.log(data);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-  };
-
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -69,31 +53,6 @@ export default function User() {
         <>
           <ul className="w-full flex flex-col items-center p-3">
             <h4 className="text-xl text-blue-700">Your Blogs</h4>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col text-center gap-1 text-blue-400">
-                      Are you sure
-                    </ModalHeader>
-                    <ModalBody>
-                      <div className="flex justify-center gap-9">
-                        <Button
-                          color="danger"
-                          variant="flat"
-                          onClick={handleDeleteBlog}
-                        >
-                          Yes
-                        </Button>
-                        <Button color="primary" variant="flat">
-                          No
-                        </Button>
-                      </div>
-                    </ModalBody>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
 
             {blogs.map((blog: Blog) => (
               <li key={blog?._id} className="mt-5">
@@ -108,7 +67,7 @@ export default function User() {
                     >
                       <FaEdit />
                     </Button>
-                    <Button
+                    {/* <Button
                       as={Link}
                       color="danger"
                       href="#"
@@ -120,7 +79,7 @@ export default function User() {
                       }}
                     >
                       <MdDelete />
-                    </Button>
+                    </Button> */}
                   </CardFooter>
                 </Card>
               </li>
