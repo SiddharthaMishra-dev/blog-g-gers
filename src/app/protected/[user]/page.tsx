@@ -52,7 +52,7 @@ export default function User() {
       {blogs.length !== 0 ? (
         <>
           <ul className="w-full flex flex-col items-center p-3">
-            <h4 className="text-xl text-blue-700">Your Blogs</h4>
+            <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
 
             {blogs.map((blog: Blog) => (
               <li key={blog?._id} className="mt-5">
@@ -64,8 +64,10 @@ export default function User() {
                       as={Link}
                       color="primary"
                       href={`/protected/${params.user}/${blog._id}`}
+                      variant="flat"
                     >
                       <FaEdit />
+                      Edit
                     </Button>
                     {/* <Button
                       as={Link}
