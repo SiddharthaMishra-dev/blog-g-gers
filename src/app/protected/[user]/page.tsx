@@ -34,7 +34,7 @@ export default function User() {
       setFetchingBlogs(true);
       const response = await fetch("/api/user");
       const json = await response.json();
-      console.log(json);
+      // console.log(json);
       setFetchingBlogs(false);
       setBlogs(json);
     } catch (err) {
@@ -49,11 +49,14 @@ export default function User() {
     <div className=" w-full h-full  overflow-auto p-4 flex flex-col  items-center">
       <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
 
-      {blogs.length !== 0 ? (
+      {fetchingBlogs ? (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      ) : blogs.length !== 0 ? (
         <>
           <ul className="w-full flex flex-col items-center p-3">
             <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
-
             {blogs.map((blog: Blog) => (
               <li key={blog?._id} className="mt-5">
                 <Card className="w-[600px]  p-4 text-cyan-50 ">
@@ -69,19 +72,6 @@ export default function User() {
                       <FaEdit />
                       Edit
                     </Button>
-                    {/* <Button
-                      as={Link}
-                      color="danger"
-                      href="#"
-                      variant="flat"
-                      // onPress={() => onOpen}
-                      onClick={() => {
-                        // console.log(blog._id);
-                        onOpen;
-                      }}
-                    >
-                      <MdDelete />
-                    </Button> */}
                   </CardFooter>
                 </Card>
               </li>

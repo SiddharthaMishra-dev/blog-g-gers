@@ -25,6 +25,7 @@ const InitialState = {
 const Page = () => {
   const params = useParams();
   const [formData, setFormData] = useState(InitialState);
+  const [deleted, setDeleted] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
 
@@ -36,8 +37,6 @@ const Page = () => {
 
   const showMessage = () => {
     setSnackbarVisible(true);
-
-    // Hide the Snackbar after a certain duration (e.g., 3 seconds)
     setTimeout(() => {
       setSnackbarVisible(false);
     }, 3000);
@@ -70,8 +69,8 @@ const Page = () => {
       console.log(err);
     }
   };
-  const handleDeleteBlog = async (queryParams) => {
-    const url = `/api/user/${queryParams.blogId}`;
+  const handleDeleteBlog = async () => {
+    const url = `/api/user/${params.blogId}`;
     try {
       const response = await fetch(url, {
         method: "DELETE",
@@ -79,7 +78,8 @@ const Page = () => {
       });
       const data = await response.json();
       if (data.status === 1) {
-        router.push(`/protected/${queryParams.user}`);
+        router.push(`/protected/${params.user}`, { scroll: false });
+        setDeleted(true);
       }
     } catch (err) {
       console.log(err);
@@ -105,7 +105,7 @@ const Page = () => {
                     <Button
                       color="danger"
                       variant="flat"
-                      onClick={() => handleDeleteBlog(params)}
+                      onClick={handleDeleteBlog}
                     >
                       Yes
                     </Button>
