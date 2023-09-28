@@ -25,6 +25,7 @@ import Link from "next/link";
 export default function User() {
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isNewAdded, setIsNewAdded] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [deleteBlogId, setDeleteBlogId] = useState("");
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
@@ -45,7 +46,7 @@ export default function User() {
 
   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [isNewAdded]);
   return (
     <div className=" w-full h-full  overflow-auto p-4 flex flex-col  items-center">
       <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
@@ -95,7 +96,11 @@ export default function User() {
           </Button>
         </div>
       )}
-      <PostModal isOpen={isOpen} onOpenChange={onOpenChange} />
+      <PostModal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        setfunction={setIsNewAdded}
+      />
     </div>
   );
 }

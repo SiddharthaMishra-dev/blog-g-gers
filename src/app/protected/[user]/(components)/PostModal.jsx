@@ -24,7 +24,7 @@ const InitialState = {
   likes: [],
 };
 
-export default function PostModal({ isOpen, onOpenChange }) {
+export default function PostModal({ isOpen, onOpenChange, setfunction }) {
   //   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState(InitialState);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
@@ -51,7 +51,8 @@ export default function PostModal({ isOpen, onOpenChange }) {
         body: JSON.stringify({ ...formData, session }),
       });
       setPosting(false);
-      showMessage();
+      setfunction(true);
+      onOpenChange();
       resetForm();
     } catch (err) {
       console.log(err);
