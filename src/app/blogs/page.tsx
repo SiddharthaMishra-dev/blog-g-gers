@@ -7,6 +7,8 @@ import { useSession } from "next-auth/react";
 import { Blog } from "@/models/UserModel";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import noContent from "../../assets/No data-pana.svg";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -81,7 +83,8 @@ export default function Blogs() {
         </ul>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
-          <h2 className="text-2xl mb-5">Oops...No content</h2>
+          {/* <h2 className="text-2xl mb-5">Oops...No content</h2> */}
+          <Image src={noContent} alt="no-content" />
           <Button
             as={Link}
             href={"/create"}

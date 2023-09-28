@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import PostModal from "./(components)/PostModal";
 import {
   Card,
   CardBody,
@@ -23,7 +24,7 @@ import Link from "next/link";
 
 export default function User() {
   const { data: session } = useSession();
-  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [blogs, setBlogs] = useState([]);
   const [deleteBlogId, setDeleteBlogId] = useState("");
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
@@ -86,13 +87,15 @@ export default function User() {
             color="primary"
             variant="light"
             className="text-xl  font-bold transition ease-in-out hover:scale-110 duration-300"
-            as={Link}
-            href="/create"
+            // as={Link}
+            onPress={onOpen}
+            // href="/create"
           >
             Write your first Post
           </Button>
         </div>
       )}
+      <PostModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </div>
   );
 }
