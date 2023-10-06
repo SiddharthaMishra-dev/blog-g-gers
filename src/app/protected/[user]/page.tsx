@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import PostModal from "./(components)/PostModal";
+import Image from "next/image";
+import firstBlog from "@/assets/dazzle-blog-post-article.gif";
 import {
   Card,
   CardBody,
@@ -21,6 +23,7 @@ import { Blog } from "@/models/UserModel";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
+import Loader from "@/app/signin/(components)/Loader";
 
 export default function User() {
   const { data: session } = useSession();
@@ -53,36 +56,36 @@ export default function User() {
 
       {fetchingBlogs ? (
         <div>
-          <h1>Loading...</h1>
+          <Loader />
         </div>
       ) : blogs.length !== 0 ? (
-        <>
-          <ul className="w-full flex flex-col items-center p-3">
-            <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
-            {blogs.map((blog: Blog) => (
-              <li key={blog?._id} className="mt-5">
-                <Card className="w-[600px]  p-4 text-cyan-50 ">
-                  <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
-                  <CardBody className="p-4">{blog.content}</CardBody>
-                  <CardFooter className="justify-between">
-                    <Button
-                      as={Link}
-                      color="primary"
-                      href={`/protected/${params.user}/${blog._id}`}
-                      variant="flat"
-                    >
-                      <FaEdit />
-                      Edit
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </li>
-            ))}
-          </ul>
-        </>
+        <ul className="w-full flex flex-col items-center p-3">
+          <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
+          {blogs.map((blog: Blog) => (
+            <li key={blog?._id} className="mt-5">
+              <Card className="w-[600px]  p-4 text-cyan-50 ">
+                <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
+                <CardBody className="p-4">{blog.content}</CardBody>
+                <CardFooter className="justify-between">
+                  <Button
+                    as={Link}
+                    color="primary"
+                    href={`/protected/${params.user}/${blog._id}`}
+                    variant="flat"
+                  >
+                    <FaEdit />
+                    Edit
+                  </Button>
+                </CardFooter>
+              </Card>
+            </li>
+          ))}
+        </ul>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
           {/* <h2 className="text-2xl"></h2> */}
+          <Image src={firstBlog} alt="first blog" height={400} width={400} />
+
           <Button
             size="lg"
             color="primary"

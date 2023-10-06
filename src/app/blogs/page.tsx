@@ -10,10 +10,22 @@ import Link from "next/link";
 import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
 
+interface User {
+  email: string;
+  image: string;
+  name: string;
+}
+
+interface sessionProps {
+  expires: Date;
+  user: User;
+}
+
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const router = useRouter();
   const { data: session } = useSession();
+  console.log(session);
 
   // const SessionSchema=typeof session
   const fetchData = async () => {
