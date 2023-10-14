@@ -5,6 +5,7 @@ import NextAuth, {
 } from "next-auth";
 // import type { NextAuthOptions } from 'next-auth'
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 // import CredentialsProvider from "next-auth/providers/credentials";
 // import connectMongo from "@/utils/connectMongo";
 // import User from "@/models/UserModel";
@@ -21,6 +22,10 @@ export const authOptions: AuthOptionProps = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     }),
   ],
   pages: {

@@ -27,6 +27,7 @@ import Loader from "@/app/signin/(components)/Loader";
 
 export default function User() {
   const { data: session } = useSession();
+  console.log(session);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isNewAdded, setIsNewAdded] = useState(false);
   const [blogs, setBlogs] = useState([]);
@@ -59,28 +60,41 @@ export default function User() {
           <Loader />
         </div>
       ) : blogs.length !== 0 ? (
-        <ul className="w-full flex flex-col items-center p-3">
-          <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
-          {blogs.map((blog: Blog) => (
-            <li key={blog?._id} className="mt-5">
-              <Card className="w-[600px]  p-4 text-cyan-50 ">
-                <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
-                <CardBody className="p-4">{blog.content}</CardBody>
-                <CardFooter className="justify-between">
-                  <Button
-                    as={Link}
-                    color="primary"
-                    href={`/protected/${params.user}/${blog._id}`}
-                    variant="flat"
-                  >
-                    <FaEdit />
-                    Edit
-                  </Button>
-                </CardFooter>
-              </Card>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ul className="w-full flex flex-col items-center p-3">
+            <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
+            {blogs.map((blog: Blog) => (
+              <li key={blog?._id} className="mt-5">
+                <Card className="w-[600px]  p-4 text-cyan-50 ">
+                  <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
+                  <CardBody className="p-4">{blog.content}</CardBody>
+                  <CardFooter className="justify-between">
+                    <Button
+                      as={Link}
+                      color="primary"
+                      href={`/protected/${params.user}/${blog._id}`}
+                      variant="flat"
+                    >
+                      <FaEdit />
+                      Edit
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </li>
+            ))}
+          </ul>
+          <Button
+            size="lg"
+            color="primary"
+            variant="light"
+            className="text-xl  font-bold transition ease-in-out hover:scale-110 duration-300"
+            // as={Link}
+            onPress={onOpen}
+            // href="/create"
+          >
+            Write your new post
+          </Button>
+        </div>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
           {/* <h2 className="text-2xl"></h2> */}
