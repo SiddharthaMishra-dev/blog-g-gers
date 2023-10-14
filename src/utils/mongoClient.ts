@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 
-const uri = "mongodb://127.0.0.1:27017/Users";
+// const uri = "mongodb://127.0.0.1:27017/Users";
+const uri = process.env.MONGO_URI || "";
 const options = {};
 
 let client;

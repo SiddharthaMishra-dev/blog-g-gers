@@ -16,13 +16,8 @@ interface User {
   name: string;
 }
 
-interface sessionProps {
-  expires: Date;
-  user: User;
-}
-
 export default function Blogs() {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const router = useRouter();
   const { data: session } = useSession();
   console.log(session);
@@ -38,13 +33,21 @@ export default function Blogs() {
     if (!session) {
       router.push("/signin");
     } else {
-      const updatedBlogs = blogs.map((b: Blog) => {
-        if (b._id === blog._id) {
-          b.likes.push(session.user.email);
-        }
-        return b;
+      // const updatedBlogs = blogs.map((b: Blog) => {
+      //   if (b._id === blog._id) {
+      //     b.likes.push(session.user!.email!);
+      //   }
+      //   return b;
+      // });
+      // setBlogs(updatedBlogs);
+      setBlogs((prevBlogs) => {
+        return prevBlogs.map((b: Blog) => {
+          if (b._id === blog._id) {
+            b.likes.push(session.user!.email!);
+          }
+          return b;
+        });
       });
-      setBlogs(updatedBlogs);
       const form = {
         session: session,
         blog: blog,

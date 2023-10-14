@@ -10,12 +10,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
   // console.log(session);
   const client = await clientPromise;
   const db = client.db("Users");
-  const reqUser = await db.collection("users").findOne(session.user);
-  const reqBlogs = await db
-    .collection("blogs")
-    .find({ userId: reqUser?._id })
-    .toArray();
-  return NextResponse.json(reqBlogs);
+  if (session === null) {
+    return NextResponse.json("No user found");
+  } else {
+    const reqUser = await db.collection("users").findOne(session.user!);
+    const reqBlogs = await db
+      .collection("blogs")
+      .find({ userId: reqUser?._id })
+      .toArray();
+    return NextResponse.json(reqBlogs);
+  }
 }
 
 export async function POST(req: NextRequest) {
