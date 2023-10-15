@@ -49,6 +49,7 @@ const Appbar = () => {
                 color="primary"
                 variant="flat"
                 onClick={() => signOut({ callbackUrl: "/" })}
+                className="font-medium text-lg"
               >
                 Log out
               </Button>
@@ -56,7 +57,13 @@ const Appbar = () => {
           </>
         ) : (
           <NavbarItem className="hidden lg:flex">
-            <Button as={Link} color="primary" variant="flat" href="/signin">
+            <Button
+              as={Link}
+              color="primary"
+              variant="flat"
+              className="font-medium text-lg"
+              href="/signin"
+            >
               Sign In
             </Button>
           </NavbarItem>

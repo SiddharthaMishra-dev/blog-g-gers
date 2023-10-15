@@ -1,5 +1,6 @@
 "use client";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
+import { FaGithub } from "react-icons/fa";
 import { Button, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
 import { Card, CardBody } from "@nextui-org/react";
@@ -31,6 +32,7 @@ const GoogleSignInButton = () => {
               size="lg"
               onClick={() => signIn("github")}
             >
+              <FaGithub className="text-lg" />
               <span className="font-bold">Continue with Github</span>
             </Button>
           </CardBody>

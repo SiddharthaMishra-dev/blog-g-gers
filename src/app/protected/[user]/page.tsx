@@ -83,7 +83,7 @@ export default function User() {
               </li>
             ))}
           </ul>
-          <Button
+          {/* <Button
             size="lg"
             color="primary"
             variant="light"
@@ -93,7 +93,7 @@ export default function User() {
             // href="/create"
           >
             Write your new post
-          </Button>
+          </Button> */}
         </div>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
