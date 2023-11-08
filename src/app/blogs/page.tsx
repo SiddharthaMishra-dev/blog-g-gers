@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
+import { useFetchBlogs } from "@/hooks/useFetchblogs";
 
 interface User {
   email: string;
@@ -17,32 +18,17 @@ interface User {
 }
 
 export default function Blogs() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session);
+  const [blog, setBlog] = useFetchBlogs();
 
-  // const SessionSchema=typeof session
-  const fetchData = async () => {
-    const response = await fetch("/api/blogs");
-    const data = await response.json();
-    setBlogs(data);
-  };
-
-  const handleLike = async (blog: Blog) => {
+  const handleLike = async (tempBlog: Blog) => {
     if (!session) {
       router.push("/signin");
     } else {
-      // const updatedBlogs = blogs.map((b: Blog) => {
-      //   if (b._id === blog._id) {
-      //     b.likes.push(session.user!.email!);
-      //   }
-      //   return b;
-      // });
-      // setBlogs(updatedBlogs);
-      setBlogs((prevBlogs) => {
-        return prevBlogs.map((b: Blog) => {
-          if (b._id === blog._id) {
+      setBlog((prevBlog) => {
+        return prevBlog.map((b: Blog) => {
+          if (b._id === tempBlog._id) {
             b.likes.push(session.user!.email!);
           }
           return b;
@@ -50,7 +36,7 @@ export default function Blogs() {
       });
       const form = {
         session: session,
-        blog: blog,
+        blog: tempBlog,
       };
       try {
         const response = await fetch("/api/user", {
@@ -58,27 +44,23 @@ export default function Blogs() {
           body: JSON.stringify(form),
         });
         const data = await response.json();
-        console.log(data);
       } catch (err) {
         console.log(err);
-        setBlogs(blogs);
+        setBlog(blog);
       }
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
-      {blogs.length !== 0 ? (
+      {blog.length !== 0 ? (
         <ul className="w-full p-3">
-          {blogs.map((blog: Blog) => (
+          {blog.map((blog: Blog) => (
             <li key={blog?._id} className="max-w-[700px] mx-auto">
               <Card className="w-full p-2 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
                 <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                 <CardBody className="p-4">{blog.content}</CardBody>
-                <CardFooter className="p-4 flex justify-between">
+                <CardFooter className="p-4 flex justify-between items-center">
                   <div>
                     <Button
                       size="lg"
@@ -90,7 +72,9 @@ export default function Blogs() {
                     </Button>
                     <span className="ml-2">{blog?.likes.length}</span>
                   </div>
-                  <div>{blog.username}</div>
+                  <div className="p-4 bg-slate-900 rounded-lg">
+                    {blog.username}
+                  </div>
                 </CardFooter>
               </Card>
             </li>

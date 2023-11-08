@@ -40,7 +40,6 @@ export default function User() {
       setFetchingBlogs(true);
       const response = await fetch("/api/user");
       const json = await response.json();
-      // console.log(json);
       setFetchingBlogs(false);
       setBlogs(json);
     } catch (err) {

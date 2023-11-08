@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import Link from "next/link";
-import {useSession} from "next-auth/react"
-import {Button} from "@nextui-org/react"
+import { useSession } from "next-auth/react";
+import { Button } from "@nextui-org/react";
 export default function Page() {
-  const{data: session}=useSession()
-  console.log(session)
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <div className="text-center bg-slate-600 h-screen flex flex-col justify-center w-2/3 mx-auto ">
       <p>
@@ -20,7 +20,7 @@ export default function Page() {
         </p>
 
         <Link href="/blogs">
-          <Button size="lg">
+          <Button size="lg" className=" scale-110">
             Discover
           </Button>
         </Link>
