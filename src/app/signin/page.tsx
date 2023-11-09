@@ -37,7 +37,7 @@ const GoogleSignInButton = () => {
             </Button>
             <Button
               color="primary"
-              className=""
+              className="mt-4"
               size="lg"
               onClick={() => signIn("google")}
             >
