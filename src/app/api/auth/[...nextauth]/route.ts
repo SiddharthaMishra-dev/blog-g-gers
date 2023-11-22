@@ -1,14 +1,9 @@
 import NextAuth, {
-  Awaitable,
   NextAuthOptions,
-  RequestInternal,
 } from "next-auth";
-// import type { NextAuthOptions } from 'next-auth'
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-// import CredentialsProvider from "next-auth/providers/credentials";
-// import connectMongo from "@/utils/connectMongo";
-// import User from "@/models/UserModel";
+
 
 import clientPromise from "@/utils/mongoClient";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";

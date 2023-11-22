@@ -69,14 +69,16 @@ export default function Index() {
           </div>
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Hastags</label>
-            <Input
-              size="lg"
-              placeholder="hashtags"
-              name="hashtags"
-              className=" p-2 text-2xl"
-              value={formData.hashtags}
-              onChange={handleChange}
-            />
+            <div className="relative">
+              <Input
+                size="lg"
+                placeholder="hashtags"
+                name="hashtags"
+                className=" p-2 text-2xl"
+                value={formData.hashtags}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className="p-4 flex flex-col w-3/5 ">
             <label>Content</label>
@@ -92,7 +94,13 @@ export default function Index() {
             />
           </div>
           <div>
-            <Button color="primary" size="lg" onClick={handleSubmit}>
+            <Button
+              size="lg"
+              color="primary"
+              variant="light"
+              className="text-3xl p-6 font-bold transition ease-in-out hover:scale-110 duration-300"
+              onClick={handleSubmit}
+            >
               Post
             </Button>
           </div>

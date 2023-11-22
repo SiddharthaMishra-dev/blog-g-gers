@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
 import { useFetchBlogs } from "@/hooks/useFetchblogs";
+import Loading from "../signin/loading";
 
 interface User {
   email: string;
@@ -20,7 +21,7 @@ interface User {
 export default function Blogs() {
   const router = useRouter();
   const { data: session } = useSession();
-  const [blog, setBlog] = useFetchBlogs();
+  const [blog, setBlog, isLoading] = useFetchBlogs();
 
   const handleLike = async (tempBlog: Blog) => {
     if (!session) {
@@ -53,7 +54,9 @@ export default function Blogs() {
 
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
-      {blog.length !== 0 ? (
+      {isLoading ? (
+        <Loading />
+      ) : blog.length !== 0 ? (
         <ul className="w-full p-3">
           {blog.map((blog: Blog) => (
             <li key={blog?._id} className="max-w-[700px] mx-auto">
@@ -82,7 +85,6 @@ export default function Blogs() {
         </ul>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
-          {/* <h2 className="text-2xl mb-5">Oops...No content</h2> */}
           <Image src={noContent} alt="no-content" />
           <Button
             as={Link}

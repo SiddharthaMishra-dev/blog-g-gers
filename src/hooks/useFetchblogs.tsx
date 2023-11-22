@@ -17,6 +17,6 @@ export const useFetchBlogs = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, [blog]);
-  return [blog, setBlog] as const;
+  }, []);
+  return [blog, setBlog, isLoading] as const;
 };
