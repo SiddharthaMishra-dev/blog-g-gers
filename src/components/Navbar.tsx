@@ -29,16 +29,22 @@ const Appbar = () => {
         {session ? (
           <>
             <NavbarItem>
-              <Button as={Link} color="primary" href={"/create"} variant="flat">
-                <FiEdit />
+              <Button
+                as={Link}
+                // color="primary"
+                href={"/create"}
+                variant="flat"
+                className="gradient_blue-dark"
+              >
+                Create Post
               </Button>
             </NavbarItem>
             <NavbarItem>
               <Button
                 as={Link}
-                color="primary"
                 href={`/protected/${session.user?.name}`}
                 variant="flat"
+                className="gradient_blue-dark"
               >
                 Dashboard
               </Button>
