@@ -11,6 +11,7 @@ import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
 import { useFetchBlogs } from "@/hooks/useFetchblogs";
 import Loading from "../signin/loading";
+import { useBlogStore } from "@/utils/store";
 
 interface User {
   email: string;
@@ -21,7 +22,13 @@ interface User {
 export default function Blogs() {
   const router = useRouter();
   const { data: session } = useSession();
+  const blogs = useBlogStore((state) => state.blogs);
+  console.log(blogs);
   const [blog, setBlog, isLoading] = useFetchBlogs();
+
+  const add = useBlogStore((state) => state.addBlogs(blog));
+
+  add;
 
   const handleLike = async (tempBlog: Blog) => {
     if (!session) {
