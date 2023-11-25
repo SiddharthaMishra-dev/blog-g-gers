@@ -22,31 +22,31 @@ interface User {
 export default function Blogs() {
   const router = useRouter();
   const { data: session } = useSession();
-  const blogs = useBlogStore((state) => state.blogs);
-  console.log(blogs);
-  const [blog, setBlog, isLoading] = useFetchBlogs();
 
-  const add = useBlogStore((state) => state.addBlogs(blog));
+  const blogs = useBlogStore((state: any) => state.blogs);
+  const add = useBlogStore((state: any) => state.addBlogs);
+  const [blog] = useFetchBlogs();
 
-  add;
+  useEffect(() => {
+    add(blog);
+  }, [blog]);
 
   const handleLike = async (tempBlog: Blog) => {
     if (!session) {
       router.push("/signin");
     } else {
-      setBlog((prevBlog) => {
-        return prevBlog.map((b: Blog) => {
+      try {
+        let newBlogs = blogs.map((b: Blog) => {
           if (b._id === tempBlog._id) {
-            b.likes.push(session.user!.email!);
+            b.likes.push(session.user?.email || "");
           }
           return b;
         });
-      });
-      const form = {
-        session: session,
-        blog: tempBlog,
-      };
-      try {
+        add(newBlogs);
+        const form = {
+          session: session,
+          blog: tempBlog,
+        };
         const response = await fetch("/api/user", {
           method: "PUT",
           body: JSON.stringify(form),
@@ -54,18 +54,16 @@ export default function Blogs() {
         const data = await response.json();
       } catch (err) {
         console.log(err);
-        setBlog(blog);
+        add(blog);
       }
     }
   };
 
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
-      {isLoading ? (
-        <Loading />
-      ) : blog.length !== 0 ? (
+      {blogs.length !== 0 ? (
         <ul className="w-full p-3">
-          {blog.map((blog: Blog) => (
+          {blogs.map((blog: Blog) => (
             <li key={blog?._id} className="max-w-[700px] mx-auto">
               <Card className="w-full p-2 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
                 <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
