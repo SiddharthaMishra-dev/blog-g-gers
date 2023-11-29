@@ -1,8 +1,6 @@
 "use client";
 import { Button, Chip } from "@nextui-org/react";
-import { useEffect, useState, useCallback } from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/react";
-import { FaRegHeart } from "react-icons/fa";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Blog } from "@/models/UserModel";
 import { useRouter } from "next/navigation";
@@ -10,8 +8,8 @@ import Link from "next/link";
 import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
 import { useFetchBlogs } from "@/hooks/useFetchblogs";
-import Loading from "../signin/loading";
 import { useBlogStore } from "@/utils/store";
+import BlogCard from "@/components/BlogCard";
 
 interface User {
   email: string;
@@ -65,26 +63,7 @@ export default function Blogs() {
         <ul className="w-full p-3">
           {blogs.map((blog: Blog) => (
             <li key={blog?._id} className="max-w-[700px] mx-auto">
-              <Card className="w-full p-2 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
-                <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
-                <CardBody className="p-4">{blog.content}</CardBody>
-                <CardFooter className="p-4 flex justify-between items-center">
-                  <div>
-                    <Button
-                      size="lg"
-                      isIconOnly
-                      color="danger"
-                      onClick={() => handleLike(blog)}
-                    >
-                      <FaRegHeart />
-                    </Button>
-                    <span className="ml-2">{blog?.likes.length}</span>
-                  </div>
-                  <div className="p-4 bg-slate-900 rounded-lg">
-                    {blog.username}
-                  </div>
-                </CardFooter>
-              </Card>
+              <BlogCard blog={blog} handleLike={handleLike} />
             </li>
           ))}
         </ul>
