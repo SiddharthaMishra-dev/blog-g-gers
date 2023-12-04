@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter, redirect, useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import {
   Button,
   Input,
