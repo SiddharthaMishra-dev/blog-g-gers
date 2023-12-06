@@ -10,15 +10,13 @@ import { Card, CardBody, CardHeader, CardFooter, Button, useDisclosure } from "@
 import { Blog } from "@/models/UserModel";
 import { FaEdit } from "react-icons/fa";
 import Link from "next/link";
-import Loader from "@/app/signin/(components)/Loader";
+import Loader from "@/components/Loader";
 
 export default function User() {
   const { data: session } = useSession();
-  console.log(session);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isNewAdded, setIsNewAdded] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [deleteBlogId, setDeleteBlogId] = useState("");
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
   const params = useParams();
 
