@@ -6,7 +6,6 @@ import { Blog } from "@/models/UserModel";
 
 export const useFetchBlogs = () => {
   const [isLoading, setIsLoading] = useState<Boolean>();
-
   const [blog, setBlog] = useState<Blog[]>([]);
   useEffect(() => {
     setIsLoading(true);
@@ -14,10 +13,9 @@ export const useFetchBlogs = () => {
       const response = await fetch("/api/blogs");
       const data = await response.json();
       setBlog(data);
-
       setIsLoading(false);
     };
     fetchData();
   }, []);
-  return [blog, setBlog, isLoading] as const;
+  return [blog, isLoading] as const;
 };
