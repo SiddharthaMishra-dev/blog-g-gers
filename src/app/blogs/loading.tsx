@@ -1,5 +1,4 @@
-"use client";
-import { Skeleton } from "@nextui-org/react";
+import { Skeleton } from "@nextui-org/skeleton";
 
 const Loading = () => {
   return (

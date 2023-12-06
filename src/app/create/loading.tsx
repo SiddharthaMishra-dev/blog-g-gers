@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "./(components)/Loader.jsx";
+import Loader from "@/components/Loader";
 
 const Loading = () => {
   return (

@@ -37,3 +37,6 @@ body {
 .gradient_blue-dark {
   background: linear-gradient(135deg, #0336c2 0%, #240146 100%);
 }
+/* #blured-element:hover {
+  filter: blur(0);
+} */
