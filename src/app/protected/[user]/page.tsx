@@ -37,7 +37,7 @@ export default function User() {
   }, [isNewAdded]);
   return (
     <div className=" w-full h-full  overflow-auto p-4 flex flex-col  items-center">
-      <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
+      <h2 className="text-2xl font-semibold">Welcome Back {session?.user?.name}</h2>
 
       {fetchingBlogs ? (
         <div>

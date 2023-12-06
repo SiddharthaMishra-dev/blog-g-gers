@@ -65,55 +65,6 @@ export default function Index() {
             handleChange={handleChange}
             handleSubmit={handleSubmit}
           />
-          {/* <div className="p-4 flex flex-col w-3/5 ">
-            <label>Title</label>
-            <Input
-              color="primary"
-              size="lg"
-              placeholder="title"
-              name="title"
-              className=" p-2 text-lg "
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="p-4 flex flex-col w-3/5 ">
-            <label>Hastags</label>
-            <div className="relative">
-              <Input
-                size="lg"
-                placeholder="hashtags"
-                name="hashtags"
-                className=" p-2 text-2xl"
-                value={formData.hashtags}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="p-4 flex flex-col w-3/5 ">
-            <label>Content</label>
-            <Textarea
-              color="primary"
-              size="lg"
-              minRows={10}
-              // cols={40}
-              name="content"
-              className="p-2 text-lg"
-              value={formData.content}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <Button
-              size="lg"
-              color="primary"
-              variant="light"
-              className="text-3xl p-6 font-bold transition ease-in-out hover:scale-110 duration-300"
-              onClick={handleSubmit}
-            >
-              Post
-            </Button>
-          </div> */}
         </div>
       </form>
     </div>

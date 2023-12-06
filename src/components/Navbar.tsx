@@ -13,7 +13,7 @@ const Appbar = () => {
     >
       <NavbarBrand>
         <Link href="/">
-          <p className="font-bold text-inherit">blog-g-gers</p>
+          <p className="text-xl font-bold text-inherit">blog-g-gers</p>
         </Link>
       </NavbarBrand>
       <NavbarContent
@@ -29,7 +29,7 @@ const Appbar = () => {
                 // color="primary"
                 href={"/create"}
                 variant="flat"
-                className="gradient_blue-dark"
+                className="gradient_blue-dark font-semibold"
               >
                 Create Post
               </Button>
@@ -39,7 +39,7 @@ const Appbar = () => {
                 as={Link}
                 href={`/protected/${session.user?.name}`}
                 variant="flat"
-                className="gradient_blue-dark"
+                className="gradient_blue-dark font-semibold"
               >
                 Dashboard
               </Button>
@@ -50,7 +50,7 @@ const Appbar = () => {
                 color="primary"
                 variant="flat"
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="font-medium text-lg"
+                className="font-semibold text-lg"
               >
                 Log out
               </Button>
@@ -62,7 +62,7 @@ const Appbar = () => {
               as={Link}
               color="primary"
               variant="flat"
-              className="font-medium text-lg"
+              className="font-semibold text-lg"
               href="/signin"
             >
               Sign In

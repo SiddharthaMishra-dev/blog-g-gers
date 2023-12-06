@@ -62,7 +62,7 @@ const InputContainer = ({
         <Button
           size="lg"
           variant="light"
-          className="text-3xl p-6 font-bold transition ease-in-out hover:scale-110 duration-300 gradient_blue-dark"
+          className="text-2xl px-8 font-semibold transition ease-in-out hover:scale-110 duration-300 gradient_blue-dark"
           onClick={handleSubmit}
         >
           Post
