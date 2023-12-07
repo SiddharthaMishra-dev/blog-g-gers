@@ -6,32 +6,17 @@ import { useParams } from "next/navigation";
 import PostModal from "./(components)/PostModal";
 import Image from "next/image";
 import firstBlog from "@/assets/dazzle-blog-post-article.gif";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardFooter,
-  // Modal,
-  // ModalContent,
-  // ModalHeader,
-  // ModalBody,
-  // ModalFooter,
-  Button,
-  useDisclosure,
-} from "@nextui-org/react";
+import { Card, CardBody, CardHeader, CardFooter, Button, useDisclosure } from "@nextui-org/react";
 import { Blog } from "@/models/UserModel";
 import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import Link from "next/link";
-import Loader from "@/app/signin/(components)/Loader";
+import Loader from "@/components/Loader";
 
 export default function User() {
   const { data: session } = useSession();
-  console.log(session);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isNewAdded, setIsNewAdded] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [deleteBlogId, setDeleteBlogId] = useState("");
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
   const params = useParams();
 
@@ -52,7 +37,7 @@ export default function User() {
   }, [isNewAdded]);
   return (
     <div className=" w-full h-full  overflow-auto p-4 flex flex-col  items-center">
-      <h2 className="text-2xl">Welcome Back {session?.user?.name}</h2>
+      <h2 className="text-2xl font-semibold">Welcome Back {session?.user?.name}</h2>
 
       {fetchingBlogs ? (
         <div>
@@ -63,7 +48,10 @@ export default function User() {
           <ul className="w-full flex flex-col items-center p-3">
             <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
             {blogs.map((blog: Blog) => (
-              <li key={blog?._id} className="mt-5">
+              <li
+                key={blog?._id}
+                className="mt-5"
+              >
                 <Card className="w-[600px]  p-4 text-cyan-50 ">
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                   <CardBody className="p-4">{blog.content}</CardBody>
@@ -97,7 +85,12 @@ export default function User() {
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
           {/* <h2 className="text-2xl"></h2> */}
-          <Image src={firstBlog} alt="first blog" height={400} width={400} />
+          <Image
+            src={firstBlog}
+            alt="first blog"
+            height={400}
+            width={400}
+          />
 
           <Button
             size="lg"

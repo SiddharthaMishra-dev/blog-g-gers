@@ -1,24 +1,19 @@
 "use client";
 
 import React from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Button,
-} from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 import { useSession, signOut } from "next-auth/react";
-import { FiEdit } from "react-icons/fi";
 
 const Appbar = () => {
   const { data: session } = useSession();
   return (
-    <Navbar className="bg-inherit h-[75px]" maxWidth="full">
+    <Navbar
+      className="bg-inherit h-[75px]"
+      maxWidth="full"
+    >
       <NavbarBrand>
         <Link href="/">
-          <p className="font-bold text-inherit">blog-g-gers</p>
+          <p className="text-xl font-bold text-inherit">blog-g-gers</p>
         </Link>
       </NavbarBrand>
       <NavbarContent
@@ -29,16 +24,22 @@ const Appbar = () => {
         {session ? (
           <>
             <NavbarItem>
-              <Button as={Link} color="primary" href={"/create"} variant="flat">
-                <FiEdit />
+              <Button
+                as={Link}
+                // color="primary"
+                href={"/create"}
+                variant="flat"
+                className="gradient_blue-dark font-semibold"
+              >
+                Create Post
               </Button>
             </NavbarItem>
             <NavbarItem>
               <Button
                 as={Link}
-                color="primary"
                 href={`/protected/${session.user?.name}`}
                 variant="flat"
+                className="gradient_blue-dark font-semibold"
               >
                 Dashboard
               </Button>
@@ -49,7 +50,7 @@ const Appbar = () => {
                 color="primary"
                 variant="flat"
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="font-medium text-lg"
+                className="font-semibold text-lg"
               >
                 Log out
               </Button>
@@ -61,7 +62,7 @@ const Appbar = () => {
               as={Link}
               color="primary"
               variant="flat"
-              className="font-medium text-lg"
+              className="font-semibold text-lg"
               href="/signin"
             >
               Sign In

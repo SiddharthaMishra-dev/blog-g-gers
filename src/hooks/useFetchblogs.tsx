@@ -7,7 +7,6 @@ import { Blog } from "@/models/UserModel";
 export const useFetchBlogs = () => {
   const [isLoading, setIsLoading] = useState<Boolean>();
   const [blog, setBlog] = useState<Blog[]>([]);
-  const [error, setError] = useState("");
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
@@ -18,5 +17,5 @@ export const useFetchBlogs = () => {
     };
     fetchData();
   }, []);
-  return [blog, setBlog, isLoading] as const;
+  return [blog, isLoading] as const;
 };

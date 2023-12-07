@@ -1,8 +1,6 @@
 "use client";
 import { Button, Chip } from "@nextui-org/react";
-import { useEffect, useState, useCallback } from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/react";
-import { FaRegHeart } from "react-icons/fa";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Blog } from "@/models/UserModel";
 import { useRouter } from "next/navigation";
@@ -10,7 +8,9 @@ import Link from "next/link";
 import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
 import { useFetchBlogs } from "@/hooks/useFetchblogs";
-import Loading from "../signin/loading";
+import { useBlogStore } from "@/utils/store";
+import BlogCard from "@/components/BlogCard";
+import Loader from "@/components/Loader";
 
 interface User {
   email: string;
@@ -21,25 +21,31 @@ interface User {
 export default function Blogs() {
   const router = useRouter();
   const { data: session } = useSession();
-  const [blog, setBlog, isLoading] = useFetchBlogs();
+
+  const blogs = useBlogStore((state: any) => state.blogs);
+  const add = useBlogStore((state: any) => state.addBlogs);
+  const [blog, isLoading] = useFetchBlogs();
+
+  useEffect(() => {
+    add(blog);
+  }, [blog]);
 
   const handleLike = async (tempBlog: Blog) => {
     if (!session) {
       router.push("/signin");
     } else {
-      setBlog((prevBlog) => {
-        return prevBlog.map((b: Blog) => {
+      try {
+        let newBlogs = blogs.map((b: Blog) => {
           if (b._id === tempBlog._id) {
-            b.likes.push(session.user!.email!);
+            b.likes.push(session.user?.email || "");
           }
           return b;
         });
-      });
-      const form = {
-        session: session,
-        blog: tempBlog,
-      };
-      try {
+        add(newBlogs);
+        const form = {
+          session: session,
+          blog: tempBlog,
+        };
         const response = await fetch("/api/user", {
           method: "PUT",
           body: JSON.stringify(form),
@@ -47,7 +53,7 @@ export default function Blogs() {
         const data = await response.json();
       } catch (err) {
         console.log(err);
-        setBlog(blog);
+        add(blog);
       }
     }
   };
@@ -55,37 +61,27 @@ export default function Blogs() {
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
       {isLoading ? (
-        <Loading />
-      ) : blog.length !== 0 ? (
+        <Loader />
+      ) : blogs.length !== 0 ? (
         <ul className="w-full p-3">
-          {blog.map((blog: Blog) => (
-            <li key={blog?._id} className="max-w-[700px] mx-auto">
-              <Card className="w-full p-2 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
-                <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
-                <CardBody className="p-4">{blog.content}</CardBody>
-                <CardFooter className="p-4 flex justify-between items-center">
-                  <div>
-                    <Button
-                      size="lg"
-                      isIconOnly
-                      color="danger"
-                      onClick={() => handleLike(blog)}
-                    >
-                      <FaRegHeart />
-                    </Button>
-                    <span className="ml-2">{blog?.likes.length}</span>
-                  </div>
-                  <div className="p-4 bg-slate-900 rounded-lg">
-                    {blog.username}
-                  </div>
-                </CardFooter>
-              </Card>
+          {blogs.map((blog: Blog) => (
+            <li
+              key={blog?._id}
+              className="max-w-[700px] mx-auto"
+            >
+              <BlogCard
+                blog={blog}
+                handleLike={handleLike}
+              />
             </li>
           ))}
         </ul>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
-          <Image src={noContent} alt="no-content" />
+          <Image
+            src={noContent}
+            alt="no-content"
+          />
           <Button
             as={Link}
             href={"/create"}
