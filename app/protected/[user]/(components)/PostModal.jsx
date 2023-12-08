@@ -10,12 +10,11 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
   Input,
   Textarea,
 } from "@nextui-org/react";
-import { CircularProgress } from "@nextui-org/react";
-import Snackbar from "@/components/Snackbar";
+import { CircularProgress } from "@nextui-org/progress";
+
 import toast from "react-hot-toast";
 
 const InitialState = {
@@ -26,17 +25,8 @@ const InitialState = {
 };
 
 export default function PostModal({ isOpen, onOpenChange, setfunction }) {
-  //   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState(InitialState);
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [posting, setPosting] = useState(false);
-
-  const showMessage = () => {
-    setSnackbarVisible(true);
-    setTimeout(() => {
-      setSnackbarVisible(false);
-    }, 3000);
-  };
   const { data: session } = useSession();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,12 +57,6 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }) {
 
   return (
     <>
-      {/* <Button onPress={onOpen}>Open Modal</Button> */}
-      <Snackbar
-        message="Your Blog has been posted"
-        show={snackbarVisible}
-      />
-
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
