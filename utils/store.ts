@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Blog } from "@/models/UserModel";
+import { Blog } from "../models/UserModel";
 
 interface BlogProps {
   blogs: Blog[];

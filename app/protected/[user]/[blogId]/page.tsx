@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 
 import Snackbar from "@/components/Snackbar";
+import toast from "react-hot-toast";
 
 const InitialState = {
   title: "",
@@ -36,10 +37,11 @@ const Page = () => {
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   const showMessage = () => {
-    setSnackbarVisible(true);
-    setTimeout(() => {
-      setSnackbarVisible(false);
-    }, 3000);
+    // setSnackbarVisible(true);
+    // setTimeout(() => {
+    //   setSnackbarVisible(false);
+    // }, 3000);
+    toast.success("Post successfully published");
   };
   const fetchBlog = async () => {
     try {
@@ -64,7 +66,7 @@ const Page = () => {
         body: JSON.stringify(formData),
       });
       const json = await response.json();
-      showMessage();
+      toast.success("Post successfully published");
     } catch (err) {
       console.log(err);
     }
@@ -93,7 +95,10 @@ const Page = () => {
   return (
     <>
       <div>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+        >
           <ModalContent>
             {(onClose) => (
               <>
@@ -109,7 +114,10 @@ const Page = () => {
                     >
                       Yes
                     </Button>
-                    <Button color="primary" variant="flat">
+                    <Button
+                      color="primary"
+                      variant="flat"
+                    >
                       No
                     </Button>
                   </div>
@@ -119,10 +127,10 @@ const Page = () => {
           </ModalContent>
         </Modal>
         <form>
-          <Snackbar
+          {/* <Snackbar
             message="Your Blog has been edited"
             show={snackbarVisible}
-          />
+          /> */}
 
           <div className="w-full h-screen flex flex-col justify-center items-center">
             <h2 className="text-2xl font-bold">Jot down your thought</h2>
@@ -163,11 +171,19 @@ const Page = () => {
               />
             </div>
             <div className="flex  gap-6">
-              <Button color="primary" size="lg" onClick={handleSubmit}>
+              <Button
+                color="primary"
+                size="lg"
+                onClick={handleSubmit}
+              >
                 Edit
               </Button>
 
-              <Button color="danger" size="lg" onPress={onOpen}>
+              <Button
+                color="danger"
+                size="lg"
+                onPress={onOpen}
+              >
                 Delete your Blog
               </Button>
             </div>
