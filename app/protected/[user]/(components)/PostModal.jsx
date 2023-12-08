@@ -16,6 +16,7 @@ import {
 } from "@nextui-org/react";
 import { CircularProgress } from "@nextui-org/react";
 import Snackbar from "@/components/Snackbar";
+import toast from "react-hot-toast";
 
 const InitialState = {
   title: "",
@@ -53,6 +54,7 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }) {
       setPosting(false);
       setfunction(true);
       onOpenChange();
+      toast.success("Post successfully published");
       resetForm();
     } catch (err) {
       console.log(err);
@@ -66,20 +68,23 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }) {
   return (
     <>
       {/* <Button onPress={onOpen}>Open Modal</Button> */}
-      <Snackbar message="Your Blog has been posted" show={snackbarVisible} />
+      <Snackbar
+        message="Your Blog has been posted"
+        show={snackbarVisible}
+      />
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isDismissable={false}
+      >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Modal Title
-              </ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
               <ModalBody>
                 <div className="w-full flex flex-col justify-center items-center">
-                  <h2 className="text-2xl font-bold text-gray-700">
-                    Jot down your thought
-                  </h2>
+                  <h2 className="text-2xl font-bold text-gray-700">Jot down your thought</h2>
                   <div className="p-1 flex flex-col w-full ">
                     <label>Title</label>
                     <Input
@@ -125,13 +130,21 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }) {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}
+                >
                   Exit
                 </Button>
                 {posting ? (
                   <CircularProgress aria-label="loading..." />
                 ) : (
-                  <Button color="primary" size="lg" onClick={handleSubmit}>
+                  <Button
+                    color="primary"
+                    size="lg"
+                    onClick={handleSubmit}
+                  >
                     Post
                   </Button>
                 )}

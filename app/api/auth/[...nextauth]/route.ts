@@ -1,12 +1,9 @@
-import NextAuth, {
-  NextAuthOptions,
-} from "next-auth";
-import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
+import NextAuth, { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 import clientPromise from "@/utils/mongoClient";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 interface AuthOptionProps extends NextAuthOptions {}
 
@@ -33,7 +30,7 @@ export const authOptions: AuthOptionProps = {
       }
       return token;
     },
-    session({ session, token, user }) {
+    async session({ session, token, user }) {
       return session; // The return type will match the one returned in `useSession()`
     },
   },

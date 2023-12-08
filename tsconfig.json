@@ -20,7 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     }
   },
   "include": [
@@ -28,8 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/api/user/route.ts",
-    "src/app/api/auth/[...nextauth]/route.ts"
+    "app/api/user/route.ts",
+    "app/api/auth/[...nextauth]/route.ts"
   ],
   "exclude": ["node_modules"]
 }

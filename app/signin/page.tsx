@@ -3,15 +3,19 @@ import { useSession, signIn } from "next-auth/react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
-import { redirect } from "next/navigation";
 const Page = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
   // const url =
   //   "https://media4.giphy.com/media/HrRvnN7NuJy4InG4MV/giphy.gif?cid=ecf05e47eq49eny9vfl658ypap8ghp1jerrc19nzup2lcnzb&ep=v1_stickers_search&rid=giphy.gif&ct=s";
 
   if (session) {
-    redirect(`/protected/${session.user?.name}`);
+    router.push(`/protected/${session.user?.name}`);
+    toast.success("Logged in successfully");
   }
   return (
     <>
