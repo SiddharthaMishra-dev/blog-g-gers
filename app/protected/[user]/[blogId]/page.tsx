@@ -13,8 +13,8 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-import Snackbar from "@/components/Snackbar";
 import toast from "react-hot-toast";
+import getBlogById from "@/actions/getBlogById";
 
 const InitialState = {
   title: "",
@@ -34,27 +34,10 @@ const Page = () => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
   };
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
-  const showMessage = () => {
-    // setSnackbarVisible(true);
-    // setTimeout(() => {
-    //   setSnackbarVisible(false);
-    // }, 3000);
-    toast.success("Post successfully published");
-  };
   const fetchBlog = async () => {
-    try {
-      let url = `/api/user/${params.blogId}`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const json = await response.json();
-      setFormData({ ...json });
-    } catch (err) {
-      console.log(err);
-    }
+    const json = await getBlogById(params.blogId);
+    setFormData({ ...json });
   };
 
   const handleSubmit = async () => {
