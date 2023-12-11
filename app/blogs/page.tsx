@@ -7,10 +7,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import noContent from "../../assets/No data-pana.svg";
-import { useFetchBlogs } from "@/hooks/useFetchblogs";
+
 import { useBlogStore } from "@/utils/store";
 import BlogCard from "@/components/BlogCard";
-import Loader from "@/components/Loader";
+
+import getBlogs from "@/actions/getBlogs";
+
+export const revalidate = 0;
 
 interface User {
   email: string;
@@ -24,11 +27,16 @@ export default function Blogs() {
 
   const blogs = useBlogStore((state: any) => state.blogs);
   const add = useBlogStore((state: any) => state.addBlogs);
-  const [blog, isLoading] = useFetchBlogs();
+  let blog: Blog[];
+
+  const fetchBlog = async () => {
+    blog = await getBlogs();
+    add(blog);
+  };
 
   useEffect(() => {
-    add(blog);
-  }, [blog]);
+    fetchBlog();
+  }, []);
 
   const handleLike = async (tempBlog: Blog) => {
     if (!session) {
@@ -58,25 +66,9 @@ export default function Blogs() {
     }
   };
 
-  return (
-    <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
-      {isLoading ? (
-        <Loader />
-      ) : blogs.length !== 0 ? (
-        <ul className="w-full p-3">
-          {blogs.map((blog: Blog) => (
-            <li
-              key={blog?._id}
-              className="max-w-[700px] mx-auto"
-            >
-              <BlogCard
-                blog={blog}
-                handleLike={handleLike}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
+  if (blogs.length === 0) {
+    return (
+      <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
         <div className="h-full flex flex-col justify-center items-center">
           <Image
             src={noContent}
@@ -93,7 +85,25 @@ export default function Blogs() {
             Be the first one to start
           </Button>
         </div>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
+      <ul className="w-full p-3">
+        {blogs.map((blog: Blog) => (
+          <li
+            key={blog?._id}
+            className="max-w-[700px] mx-auto"
+          >
+            <BlogCard
+              blog={blog}
+              handleLike={handleLike}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
