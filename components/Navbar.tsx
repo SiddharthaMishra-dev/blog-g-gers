@@ -29,7 +29,7 @@ const Appbar = () => {
                 // color="primary"
                 href={"/create"}
                 variant="flat"
-                className="gradient_blue-dark font-semibold"
+                className="theme-color font-semibold"
               >
                 Create Post
               </Button>
@@ -39,7 +39,7 @@ const Appbar = () => {
                 as={Link}
                 href={`/protected/${session.user?.name}`}
                 variant="flat"
-                className="gradient_blue-dark font-semibold"
+                className="theme-color font-semibold"
               >
                 Dashboard
               </Button>

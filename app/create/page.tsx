@@ -84,7 +84,7 @@ export default function Index() {
               type="submit"
               size="lg"
               variant="light"
-              className="text-2xl px-8 font-semibold transition ease-in-out hover:scale-110 duration-300 gradient_blue-dark"
+              className="text-2xl px-8 font-semibold transition ease-in-out  duration-300 theme-color hover:scale-110"
             >
               Post
             </Button>

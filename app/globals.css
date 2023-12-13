@@ -17,11 +17,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
 .custom-text {
@@ -36,6 +32,12 @@ body {
 
 .gradient_blue-dark {
   background: linear-gradient(135deg, #0336c2 0%, #240146 100%);
+}
+.theme-color {
+  background-color: #0336c4;
+}
+.bg-theme {
+  background-color: #0336c433;
 }
 /* #blured-element:hover {
   filter: blur(0);

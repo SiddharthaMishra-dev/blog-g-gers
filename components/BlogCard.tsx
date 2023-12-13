@@ -13,7 +13,7 @@ interface CardProps {
 
 const BlogCard = ({ blog, handleLike }: CardProps) => {
   return (
-    <Card className="w-full p-2 m-4 bg-inherit text-cyan-50 border  drop-shadow-2xl ">
+    <Card className="w-full p-2 m-4 bg-theme text-cyan-50 font-semibold  drop-shadow-2xl ">
       <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
       <CardBody className="p-4">{blog.content}</CardBody>
       <CardFooter className="p-4 flex justify-between items-center">

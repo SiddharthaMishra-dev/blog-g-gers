@@ -9,6 +9,7 @@ const getBlogs = async (): Promise<Blog[]> => {
   } catch (err) {
     console.log(err);
   }
+
   return (json as any) || [];
 };
 
