@@ -1,8 +1,10 @@
 "use client";
+import { Blog } from "@/models/UserModel";
+
+import LikeButton from "./LikeButton";
+
 import React from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
-import { FaRegHeart } from "react-icons/fa";
-import { Blog } from "@/models/UserModel";
 import { FaRegComment } from "react-icons/fa";
 import Link from "next/link";
 
@@ -18,10 +20,10 @@ const BlogCard = ({ blog, handleLike }: CardProps) => {
       <CardBody className="p-4">{blog.content}</CardBody>
       <CardFooter className="p-4 flex justify-between items-center">
         <div className="flex justify-center items-center gap-x-6">
-          <div className="flex items-center hover:text-red-600 transition">
-            <FaRegHeart onClick={() => handleLike(blog)} />
-            <span className="ml-2">{blog?.likes.length}</span>
-          </div>
+          <LikeButton
+            blog={blog}
+            handleLike={handleLike}
+          />
           <div className="hover:text-blue-500 transition">
             <Link href={`/blogs/${blog._id}`}>
               <FaRegComment />
