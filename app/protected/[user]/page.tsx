@@ -3,14 +3,15 @@
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import PostModal from "./(components)/PostModal";
-import Image from "next/image";
-import firstBlog from "@/assets/dazzle-blog-post-article.gif";
 import { Card, CardBody, CardHeader, CardFooter, Button, useDisclosure } from "@nextui-org/react";
 import { Blog } from "@/models/UserModel";
 import { FaEdit } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
+
 import Loader from "@/components/Loader";
+import PostModal from "@/components/PostModal";
+import firstBlog from "@/assets/dazzle-blog-post-article.gif";
 
 export default function User() {
   const { data: session } = useSession();
@@ -70,17 +71,6 @@ export default function User() {
               </li>
             ))}
           </ul>
-          {/* <Button
-            size="lg"
-            color="primary"
-            variant="light"
-            className="text-xl  font-bold transition ease-in-out hover:scale-110 duration-300"
-            // as={Link}
-            onPress={onOpen}
-            // href="/create"
-          >
-            Write your new post
-          </Button> */}
         </div>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">

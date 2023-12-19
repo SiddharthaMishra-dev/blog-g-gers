@@ -14,7 +14,6 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { CircularProgress } from "@nextui-org/progress";
-
 import toast from "react-hot-toast";
 
 const InitialState = {
@@ -24,16 +23,22 @@ const InitialState = {
   likes: [],
 };
 
-export default function PostModal({ isOpen, onOpenChange, setfunction }) {
+interface PostModalProps {
+  isOpen: boolean;
+  onOpenChange: () => void;
+  setfunction: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function PostModal({ isOpen, onOpenChange, setfunction }: PostModalProps) {
   const [formData, setFormData] = useState(InitialState);
   const [posting, setPosting] = useState(false);
   const { data: session } = useSession();
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       setPosting(true);
@@ -106,11 +111,6 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }) {
                       onChange={handleChange}
                     />
                   </div>
-                  {/* <div>
-                    <Button color="primary" size="lg" onClick={handleSubmit}>
-                      Post
-                    </Button>
-                  </div> */}
                 </div>
               </ModalBody>
               <ModalFooter>
