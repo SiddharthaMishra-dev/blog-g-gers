@@ -1,11 +1,28 @@
 "use client";
 
-import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import React, { useState } from "react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useSession, signOut } from "next-auth/react";
+import PostModal from "./PostModal";
+import { useRouter } from "next/navigation";
 
 const Appbar = () => {
   const { data: session } = useSession();
+  const { isOpen, onOpenChange, onOpen } = useDisclosure();
+  const [isNewAdded, setIsNewAdded] = useState(false);
+
+  const router = useRouter();
+  if (isNewAdded && session !== null) {
+    router.push(`/protected/${session.user?.name}`);
+  }
   return (
     <Navbar
       className="bg-inherit h-[75px]"
@@ -25,11 +42,9 @@ const Appbar = () => {
           <>
             <NavbarItem>
               <Button
-                as={Link}
-                // color="primary"
-                href={"/create"}
+                onPress={onOpen}
                 variant="flat"
-                className="gradient_blue-dark font-semibold"
+                className="theme-color font-semibold"
               >
                 Create Post
               </Button>
@@ -39,7 +54,7 @@ const Appbar = () => {
                 as={Link}
                 href={`/protected/${session.user?.name}`}
                 variant="flat"
-                className="gradient_blue-dark font-semibold"
+                className="theme-color font-semibold"
               >
                 Dashboard
               </Button>
@@ -70,6 +85,11 @@ const Appbar = () => {
           </NavbarItem>
         )}
       </NavbarContent>
+      <PostModal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        setfunction={setIsNewAdded}
+      />
     </Navbar>
   );
 };

@@ -10,7 +10,7 @@ export default function Home() {
         <Button
           color="primary"
           size="lg"
-          className="mt-4 hover:scale-110 gradient_blue-dark "
+          className="mt-4 theme-color  font-semibold  transition "
         >
           <span className="text-lg text-bold ">Discover</span>
         </Button>

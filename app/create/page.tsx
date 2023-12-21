@@ -2,69 +2,93 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import Snackbar from "../../components/Snackbar";
-import InputContainer from "@/components/InputContainer";
-
-const InitialState = {
-  title: "",
-  hashtags: "",
-  content: "",
-  likes: [],
-};
+import { useRouter } from "next/navigation";
+import { Button, Input, Textarea } from "@nextui-org/react";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function Index() {
-  const [formData, setFormData] = useState(InitialState);
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { data: session } = useSession();
-  const showMessage = () => {
-    setSnackbarVisible(true);
+  const { register, reset, handleSubmit } = useForm<FieldValues>({
+    defaultValues: {
+      title: "",
+      hashtags: "",
+      content: "",
+      likes: [],
+    },
+  });
 
-    // Hide the Snackbar after a certain duration (e.g., 3 seconds)
-    setTimeout(() => {
-      setSnackbarVisible(false);
-    }, 3000);
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+    setIsLoading(true);
+    try {
+      if (!session) {
+        return router.push("/signin");
+      }
+      const response = await fetch("/api/user", {
+        method: "POST",
+        body: JSON.stringify({ ...values, session }),
+      });
+      setIsLoading(false);
+      toast.success("Your Blog has been posted");
+      reset();
+      router.push("/blogs");
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prevValue) => ({ ...prevValue, [name]: value }));
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const response = await fetch("/api/user", {
-      method: "POST",
-      body: JSON.stringify({ ...formData, session }),
-    });
-    showMessage();
-    resetForm();
-    redirect("/blogs");
-  };
-
-  const resetForm = () => {
-    setFormData(InitialState);
-  };
-
-  if (session === null) {
-    redirect("/signin");
-  }
 
   return (
     <div>
-      <form>
-        <Snackbar
-          message="Your Blog has been posted"
-          show={snackbarVisible}
-        />
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full h-screen flex flex-col justify-center items-center">
           <h2 className="text-2xl font-bold">Jot down your thought</h2>
-          <InputContainer
-            title={formData.title}
-            hashtags={formData.hashtags}
-            content={formData.content}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
+          <div className="p-4 flex flex-col w-3/5 ">
+            <label>Title</label>
+            <Input
+              size="lg"
+              placeholder="title"
+              id="title"
+              className=" p-2 text-lg "
+              {...register("title", { required: true })}
+            />
+          </div>
+          <div className="p-4 flex flex-col w-3/5 ">
+            <label>Hastags</label>
+            <div className="relative">
+              <Input
+                size="lg"
+                placeholder="hashtags"
+                id="hashtags"
+                className=" p-2 text-2xl"
+                {...register("hashtags", { required: true })}
+              />
+            </div>
+          </div>
+          <div className="p-4 flex flex-col w-3/5 ">
+            <label>Content</label>
+            <Textarea
+              size="lg"
+              minRows={10}
+              id="content"
+              className="p-2 text-lg"
+              {...register("content", { required: true })}
+            />
+          </div>
+          <div>
+            <Button
+              disabled={isLoading}
+              type="submit"
+              size="lg"
+              variant="light"
+              className="text-2xl px-8 font-semibold transition ease-in-out  duration-300 theme-color hover:scale-110"
+            >
+              Post
+            </Button>
+          </div>
         </div>
       </form>
     </div>
