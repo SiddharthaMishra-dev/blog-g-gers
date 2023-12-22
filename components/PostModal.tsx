@@ -63,6 +63,7 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
   return (
     <>
       <Modal
+        className="dark"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isDismissable={false}
@@ -70,38 +71,38 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">
+                <h2 className="text-2xl font-bold text-primary text-center">
+                  Jot down your thought
+                </h2>
+              </ModalHeader>
               <ModalBody>
-                <div className="w-full flex flex-col justify-center items-center">
-                  <h2 className="text-2xl font-bold text-gray-700">Jot down your thought</h2>
-                  <div className="p-1 flex flex-col w-full ">
-                    <label>Title</label>
+                <div className="w-full flex flex-col justify-center items-center gap-y-4">
+                  <div className="p-1 flex flex-col w-full gap-y-2 ">
+                    {/* <label>Title</label> */}
                     <Input
-                      color="primary"
                       size="lg"
-                      placeholder="title"
+                      placeholder="title..."
                       name="title"
                       className=" p-2 text-lg "
                       value={formData.title}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="p-1 flex flex-col w-full ">
-                    <label>Hastags</label>
+                  <div className="p-1 flex flex-col w-full gap-y-2">
+                    {/* <label>Hastags</label> */}
                     <Input
-                      color="secondary"
                       size="lg"
-                      placeholder="hashtags"
+                      placeholder="hashtags..."
                       name="hashtags"
                       className=" p-2 text-2xl"
                       value={formData.hashtags}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="p-1 flex flex-col w-full ">
-                    <label>Content</label>
+                  <div className="p-1 flex flex-col w-full gap-y-2">
+                    {/* <label>Content</label> */}
                     <Textarea
-                      color="primary"
                       size="lg"
                       minRows={10}
                       // cols={40}
@@ -109,6 +110,7 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
                       className="p-2 text-lg"
                       value={formData.content}
                       onChange={handleChange}
+                      placeholder="write your thoughts..."
                     />
                   </div>
                 </div>
@@ -117,6 +119,7 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
                 <Button
                   color="danger"
                   variant="light"
+                  size="lg"
                   onPress={onClose}
                 >
                   Exit
