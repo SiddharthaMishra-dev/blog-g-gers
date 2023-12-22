@@ -7,6 +7,7 @@ import React from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
 import { FaRegComment } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface CardProps {
   blog: Blog;
@@ -14,6 +15,7 @@ interface CardProps {
 }
 
 const BlogCard = ({ blog, handleLike }: CardProps) => {
+  const router = useRouter();
   return (
     <Card className="w-full p-2 m-4 bg-theme text-cyan-50 font-semibold  drop-shadow-2xl ">
       <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>

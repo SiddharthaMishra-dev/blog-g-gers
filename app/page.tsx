@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="h-full flex flex-col items-center justify-center p-24">
       <h1 className={` font-black  mb-2 custom-text`}>Blog-g-ers</h1>
       <h2 className="mt-2 text-4xl text-gray-200"> Share who you are</h2>
       <Link href="/blogs">
@@ -12,7 +12,7 @@ export default function Home() {
           size="lg"
           className="mt-4 theme-color  font-semibold  transition "
         >
-          <span className="text-lg text-bold ">Discover</span>
+          <span className="text-lg text-bold hover:tracking-wider transition">Discover</span>
         </Button>
       </Link>
     </main>

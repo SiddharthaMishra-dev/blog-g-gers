@@ -11,16 +11,12 @@ export const metadata: Metadata = {
   description: "Be yourself",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <Provider>
-          <div className="h-screen overflow-auto">
+          <div className="h-screen overflow-hidden overflow-y-auto">
             <Appbar />
             <div className="h-[calc(100vh-75px)]">{children}</div>
           </div>

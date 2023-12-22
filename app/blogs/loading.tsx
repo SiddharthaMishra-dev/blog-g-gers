@@ -1,11 +1,16 @@
+import { Card } from "@nextui-org/card";
 import { Skeleton } from "@nextui-org/skeleton";
 
 const Loading = () => {
   return (
-    <main className="flex flex-col justify-center items-center gap-y-10">
-      <Skeleton className="h-20 w-[440px] rouded-lg"></Skeleton>
-      <Skeleton className="h-20 w-[440px] rouded-lg" />
-      <Skeleton className="h-20 w-[440px] rouded-lg" />
+    <main className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
+      <div className="w-full overflow-hidden">
+        <div className="max-w-[700px] mx-auto">
+          <Skeleton className="w-full m-4 h-[200px] rouded-lg" />
+          <Skeleton className="w-full m-4 h-[200px] rouded-lg" />
+          <Skeleton className="w-full m-4 h-[200px] rouded-lg" />
+        </div>
+      </div>
     </main>
   );
 };
