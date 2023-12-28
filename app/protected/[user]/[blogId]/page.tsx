@@ -15,6 +15,7 @@ import {
 
 import toast from "react-hot-toast";
 import getBlogById from "@/actions/getBlogById";
+import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 
 const InitialState = {
   title: "",
@@ -110,17 +111,11 @@ const Page = () => {
           </ModalContent>
         </Modal>
         <form>
-          {/* <Snackbar
-            message="Your Blog has been edited"
-            show={snackbarVisible}
-          /> */}
-
           <div className="w-full h-screen flex flex-col justify-center items-center">
-            <h2 className="text-2xl font-bold">Jot down your thought</h2>
+            <h2 className="text-2xl font-bold">Update your thought</h2>
             <div className="p-4 flex flex-col w-3/5 ">
               <label>Title</label>
               <Input
-                color="primary"
                 size="lg"
                 placeholder="title"
                 name="title"
@@ -143,7 +138,6 @@ const Page = () => {
             <div className="p-4 flex flex-col w-3/5 ">
               <label>Content</label>
               <Textarea
-                color="primary"
                 size="lg"
                 rows={20}
                 cols={40}
@@ -158,6 +152,7 @@ const Page = () => {
                 color="primary"
                 size="lg"
                 onClick={handleSubmit}
+                className="font-semibold"
               >
                 Edit
               </Button>
@@ -166,6 +161,7 @@ const Page = () => {
                 color="danger"
                 size="lg"
                 onPress={onOpen}
+                className="font-semibold"
               >
                 Delete your Blog
               </Button>
