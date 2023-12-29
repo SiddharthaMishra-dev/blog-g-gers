@@ -5,8 +5,11 @@ import React from "react";
 
 const Page = () => {
   const params = useParams();
-  console.log(params);
-  return <div></div>;
+  return (
+    <div>
+      <h1>Blogs id</h1>
+    </div>
+  );
 };
 
 export default Page;
