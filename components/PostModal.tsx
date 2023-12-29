@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import {
   Modal,
@@ -79,7 +79,6 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
               <ModalBody>
                 <div className="w-full flex flex-col justify-center items-center gap-y-4">
                   <div className="p-1 flex flex-col w-full gap-y-2 ">
-                    {/* <label>Title</label> */}
                     <Input
                       size="lg"
                       placeholder="title..."
@@ -90,7 +89,6 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
                     />
                   </div>
                   <div className="p-1 flex flex-col w-full gap-y-2">
-                    {/* <label>Hastags</label> */}
                     <Input
                       size="lg"
                       placeholder="hashtags..."
@@ -101,11 +99,9 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
                     />
                   </div>
                   <div className="p-1 flex flex-col w-full gap-y-2">
-                    {/* <label>Content</label> */}
                     <Textarea
                       size="lg"
                       minRows={10}
-                      // cols={40}
                       name="content"
                       className="p-2 text-lg"
                       value={formData.content}

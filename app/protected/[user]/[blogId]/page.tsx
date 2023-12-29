@@ -15,7 +15,6 @@ import {
 
 import toast from "react-hot-toast";
 import getBlogById from "@/actions/getBlogById";
-import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 
 const InitialState = {
   title: "",

@@ -19,5 +19,10 @@ export interface Blog {
   userId: string;
   _id: string;
   username: string;
-  comments?: string[];
+  comments?: [
+    {
+      userId: string;
+      comment: string;
+    }
+  ];
 }
