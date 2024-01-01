@@ -9,7 +9,9 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 interface CommentModalProps {
   blog: Blog;
@@ -20,6 +22,7 @@ interface CommentModalProps {
 const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
   const [comment, setComment] = useState("");
   const [posting, setPosting] = useState(false);
+  const router = useRouter();
   const { data: session } = useSession();
   const handleSubmit = async (e: any) => {
     if (comment.length > 0) {
@@ -37,7 +40,8 @@ const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
           body: JSON.stringify(form),
         });
         if (response.ok) {
-          console.log("success");
+          toast.success("Comment posted!");
+          router.push("/blogs");
         }
       } catch (err) {
         console.log(err);
