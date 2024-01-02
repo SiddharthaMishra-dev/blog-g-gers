@@ -38,7 +38,7 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
   return (
-    <div className="flex items-center hover:text-red-600 transition">
+    <div className="flex items-center hover:text-red-600 transition cursor-pointer">
       <Icon
         onClick={likeFn}
         size={20}

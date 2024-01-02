@@ -7,6 +7,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Textarea,
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ interface CommentModalProps {
 
 const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
   const [comment, setComment] = useState("");
+  const [isCommentEmpty, setIsCommentEmpty] = useState(false);
   const [posting, setPosting] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
@@ -28,7 +30,7 @@ const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
     if (comment.length > 0) {
       setPosting(true);
       let userName = session?.user?.name;
-      let tempBlog = { ...blog, comments: [{ userName, comment }] };
+      let tempBlog = { ...blog, comments: [...blog.comments!, { userName, comment }] };
       const form = {
         session: session,
         blog: tempBlog,
@@ -40,12 +42,18 @@ const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
           body: JSON.stringify(form),
         });
         if (response.ok) {
+          onOpenChange();
           toast.success("Comment posted!");
-          router.push("/blogs");
+          return router.refresh();
         }
       } catch (err) {
         console.log(err);
       }
+    } else {
+      setIsCommentEmpty(true);
+      setTimeout(() => {
+        setIsCommentEmpty(false);
+      }, 3000);
     }
   };
   return (
@@ -70,12 +78,16 @@ const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
                 </div>
 
                 <div className=" py-4">
-                  <Input
+                  <Textarea
+                    isInvalid={isCommentEmpty}
+                    className="text-lg"
                     placeholder="Add a comment"
+                    minRows={5}
                     value={comment}
                     onChange={(e) => {
                       setComment(e.target.value);
                     }}
+                    errorMessage={isCommentEmpty && "Please add a comment"}
                   />
                 </div>
               </ModalBody>
