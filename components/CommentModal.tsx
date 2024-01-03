@@ -18,9 +18,10 @@ interface CommentModalProps {
   blog: Blog;
   isOpen: boolean;
   onOpenChange: () => void;
+  handleComment: (blog: Blog) => void;
 }
 
-const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
+const CommentModal = ({ blog, isOpen, onOpenChange, handleComment }: CommentModalProps) => {
   const [comment, setComment] = useState("");
   const [isCommentEmpty, setIsCommentEmpty] = useState(false);
   const [posting, setPosting] = useState(false);
@@ -29,26 +30,27 @@ const CommentModal = ({ blog, isOpen, onOpenChange }: CommentModalProps) => {
   const handleSubmit = async (e: any) => {
     if (comment.length > 0) {
       setPosting(true);
-      let userName = session?.user?.name;
-      let tempBlog = { ...blog, comments: [...blog.comments!, { userName, comment }] };
-      const form = {
-        session: session,
-        blog: tempBlog,
-      };
+      let userName = session?.user?.name || "";
+      let tempBlog: Blog = { ...blog, comments: [...(blog.comments ?? []), { userName, comment }] };
+      handleComment(tempBlog);
+      onOpenChange();
+      // const form = {
+      //   session: session,
+      //   blog: tempBlog,
+      // };
 
-      try {
-        const response = await fetch("/api/user", {
-          method: "PUT",
-          body: JSON.stringify(form),
-        });
-        if (response.ok) {
-          onOpenChange();
-          toast.success("Comment posted!");
-          return router.refresh();
-        }
-      } catch (err) {
-        console.log(err);
-      }
+      // try {
+      //   const response = await fetch("/api/user", {
+      //     method: "PUT",
+      //     body: JSON.stringify(form),
+      //   });
+      //   if (response.ok) {
+      //     onOpenChange();
+      //     toast.success("Comment posted!");
+      //   }
+      // } catch (err) {
+      //   console.log(err);
+      // }
     } else {
       setIsCommentEmpty(true);
       setTimeout(() => {

@@ -16,8 +16,6 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
 
   const { data: session } = useSession();
 
-  console.log(session);
-
   const likeFn = () => {
     if (!isLiked) {
       setIsLiked(true);

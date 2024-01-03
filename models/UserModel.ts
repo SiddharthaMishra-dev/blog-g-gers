@@ -19,10 +19,8 @@ export interface Blog {
   userId: string;
   _id: string;
   username: string;
-  comments?: [
-    {
-      userId: string;
-      comment: string;
-    }
-  ];
+  comments?: {
+    userName: string;
+    comment: string;
+  }[];
 }
