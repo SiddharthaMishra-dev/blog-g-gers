@@ -1,3 +1,5 @@
+"use client";
+
 import { Blog } from "@/models/UserModel";
 import {
   Button,
@@ -12,7 +14,6 @@ import {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 interface CommentModalProps {
   blog: Blog;
@@ -27,30 +28,13 @@ const CommentModal = ({ blog, isOpen, onOpenChange, handleComment }: CommentModa
   const [posting, setPosting] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     if (comment.length > 0) {
       setPosting(true);
       let userName = session?.user?.name || "";
       let tempBlog: Blog = { ...blog, comments: [...(blog.comments ?? []), { userName, comment }] };
       handleComment(tempBlog);
       onOpenChange();
-      // const form = {
-      //   session: session,
-      //   blog: tempBlog,
-      // };
-
-      // try {
-      //   const response = await fetch("/api/user", {
-      //     method: "PUT",
-      //     body: JSON.stringify(form),
-      //   });
-      //   if (response.ok) {
-      //     onOpenChange();
-      //     toast.success("Comment posted!");
-      //   }
-      // } catch (err) {
-      //   console.log(err);
-      // }
     } else {
       setIsCommentEmpty(true);
       setTimeout(() => {

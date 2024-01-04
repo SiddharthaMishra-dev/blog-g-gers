@@ -5,10 +5,8 @@ import LikeButton from "./LikeButton";
 
 import React, { useEffect } from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
-import { FaRegComment } from "react-icons/fa";
-import { useDisclosure } from "@nextui-org/react";
 
-import CommentModal from "./CommentModal";
+import CommentButton from "./CommentButton";
 
 interface CardProps {
   blog: Blog;
@@ -17,7 +15,7 @@ interface CardProps {
 }
 
 const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  console.log("rendered");
   console.log(blog);
   return (
     <>
@@ -30,22 +28,14 @@ const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {
               blog={blog}
               handleLike={handleLike}
             />
-            <div className="flex items-center justify-center hover:text-blue-500 transition cursor-pointer">
-              <FaRegComment onClick={onOpen} />
-              <span className="ml-2">
-                {blog.comments?.length! > 0 ? blog?.comments?.length : ""}
-              </span>
-            </div>
+            <CommentButton
+              blog={blog}
+              handleComment={handleComment}
+            />
           </div>
           <div className="p-4 bg-slate-900 rounded-lg">{blog.username}</div>
         </CardFooter>
       </Card>
-      <CommentModal
-        blog={blog}
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        handleComment={handleComment}
-      />
     </>
   );
 };
