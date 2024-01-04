@@ -3,38 +3,40 @@ import { Blog } from "@/models/UserModel";
 
 import LikeButton from "./LikeButton";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
-import { FaRegComment } from "react-icons/fa";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+
+import CommentButton from "./CommentButton";
 
 interface CardProps {
   blog: Blog;
   handleLike: (blog: Blog) => void;
+  handleComment: (blog: Blog) => void;
 }
 
-const BlogCard = ({ blog, handleLike }: CardProps) => {
-  const router = useRouter();
+const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {
+  console.log("rendered");
+  console.log(blog);
   return (
-    <Card className="w-full p-2 m-4 bg-theme text-cyan-50 font-semibold  drop-shadow-2xl ">
-      <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
-      <CardBody className="p-4">{blog.content}</CardBody>
-      <CardFooter className="p-4 flex justify-between items-center">
-        <div className="flex justify-center items-center gap-x-6">
-          <LikeButton
-            blog={blog}
-            handleLike={handleLike}
-          />
-          <div className="hover:text-blue-500 transition">
-            <Link href={`/blogs/${blog._id}`}>
-              <FaRegComment />
-            </Link>
+    <>
+      <Card className="w-full p-2 m-4 bg-theme text-cyan-50 font-semibold  drop-shadow-2xl ">
+        <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
+        <CardBody className="p-4">{blog.content}</CardBody>
+        <CardFooter className="p-4 flex justify-between items-center">
+          <div className="flex justify-center items-center gap-x-6">
+            <LikeButton
+              blog={blog}
+              handleLike={handleLike}
+            />
+            <CommentButton
+              blog={blog}
+              handleComment={handleComment}
+            />
           </div>
-        </div>
-        <div className="p-4 bg-slate-900 rounded-lg">{blog.username}</div>
-      </CardFooter>
-    </Card>
+          <div className="p-4 bg-slate-900 rounded-lg">{blog.username}</div>
+        </CardFooter>
+      </Card>
+    </>
   );
 };
 
