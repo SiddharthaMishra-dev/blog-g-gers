@@ -1,11 +1,7 @@
-"use client";
-import { Blog } from "@/models/UserModel";
-
-import LikeButton from "./LikeButton";
-
-import React, { useEffect } from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
 
+import { Blog } from "@/models/UserModel";
+import LikeButton from "./LikeButton";
 import CommentButton from "./CommentButton";
 
 interface CardProps {
@@ -15,8 +11,6 @@ interface CardProps {
 }
 
 const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {
-  console.log("rendered");
-  console.log(blog);
   return (
     <>
       <Card className="w-full p-2 m-4 bg-theme text-cyan-50 font-semibold  drop-shadow-2xl ">

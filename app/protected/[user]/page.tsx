@@ -4,11 +4,11 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardBody, CardHeader, CardFooter, Button, useDisclosure } from "@nextui-org/react";
-import { Blog } from "@/models/UserModel";
 import { FaEdit } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 
+import { Blog } from "@/models/UserModel";
 import Loader from "@/components/Loader";
 import PostModal from "@/components/PostModal";
 import firstBlog from "@/assets/dazzle-blog-post-article.gif";
@@ -46,14 +46,13 @@ export default function User() {
         </div>
       ) : blogs.length !== 0 ? (
         <div>
-          <ul className="w-full flex flex-col items-center p-3">
-            <h4 className="text-4xl mt-4  text-blue-700">Your Blogs</h4>
+          <ul className="w-full flex flex-col items-center p-3 mt-7">
             {blogs.map((blog: Blog) => (
               <li
                 key={blog?._id}
                 className="mt-5"
               >
-                <Card className="w-[600px]  p-4 text-cyan-50 ">
+                <Card className="w-[600px] bg-theme  p-4 text-cyan-50 ">
                   <CardHeader className="text-2xl p-4">{blog.title}</CardHeader>
                   <CardBody className="p-4">{blog.content}</CardBody>
                   <CardFooter className="justify-between">
@@ -61,7 +60,7 @@ export default function User() {
                       as={Link}
                       color="primary"
                       href={`/protected/${params.user}/${blog._id}`}
-                      variant="flat"
+                      className="font-semibold"
                     >
                       <FaEdit />
                       Edit
@@ -74,7 +73,6 @@ export default function User() {
         </div>
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
-          {/* <h2 className="text-2xl"></h2> */}
           <Image
             src={firstBlog}
             alt="first blog"
@@ -87,9 +85,7 @@ export default function User() {
             color="primary"
             variant="light"
             className="text-xl  font-bold transition ease-in-out hover:scale-110 duration-300"
-            // as={Link}
             onPress={onOpen}
-            // href="/create"
           >
             Write your first Post
           </Button>

@@ -1,5 +1,4 @@
 "use client";
-
 import getBlogs from "@/actions/getBlogs";
 import BlogList from "@/components/BlogList";
 
