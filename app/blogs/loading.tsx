@@ -1,4 +1,3 @@
-import { Card } from "@nextui-org/card";
 import { Skeleton } from "@nextui-org/skeleton";
 
 const Loading = () => {

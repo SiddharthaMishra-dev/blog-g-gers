@@ -2,7 +2,6 @@
 
 import { Blog } from "@/models/UserModel";
 import { useSession } from "next-auth/react";
-import { FaRegHeart } from "react-icons/fa";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
 
