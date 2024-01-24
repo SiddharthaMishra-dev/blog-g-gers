@@ -68,3 +68,14 @@ body {
 /* #blured-element:hover {
   filter: blur(0);
 } */
+
+@media screen and (max-width: 768px) {
+  .custom-text {
+    font-size: 140px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .custom-text {
+    font-size: 100px;
+  }
+}

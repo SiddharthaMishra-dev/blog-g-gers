@@ -33,10 +33,10 @@ const Appbar = () => {
           <p className="text-xl font-bold text-inherit">blog-g-gers</p>
         </Link>
       </NavbarBrand>
-      <NavbarContent
+      {/* <NavbarContent
         className="hidden sm:flex gap-4"
         justify="center"
-      ></NavbarContent>
+      ></NavbarContent> */}
       <NavbarContent justify="end">
         {session ? (
           <>
@@ -72,7 +72,7 @@ const Appbar = () => {
             </NavbarItem>
           </>
         ) : (
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem className="lg:flex">
             <Button
               as={Link}
               color="primary"
