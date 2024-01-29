@@ -17,7 +17,7 @@ export default function User() {
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isNewAdded, setIsNewAdded] = useState(false);
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
   const params = useParams();
 

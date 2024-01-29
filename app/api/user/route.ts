@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/config/authoptions";
 import { getServerSession } from "next-auth/next";
 import clientPromise from "@/utils/mongoClient";
 import { getSession } from "next-auth/react";
@@ -15,10 +15,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return NextResponse.json("No user found");
   } else {
     const reqUser = await dbtest.collection("users").findOne(session.user!);
-    const reqBlogs = await dbusers
-      .collection("blogs")
-      .find({ userId: reqUser?._id })
-      .toArray();
+    const reqBlogs = await dbusers.collection("blogs").find({ userId: reqUser?._id }).toArray();
     return NextResponse.json(reqBlogs);
   }
 }
@@ -47,9 +44,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
   const client = await clientPromise;
   const dbusers = client.db("Users");
   const dbtest = client.db("test");
-  const reqBlog = await dbusers
-    .collection("blogs")
-    .findOne({ _id: new ObjectId(json.blog?._id) });
+  const reqBlog = await dbusers.collection("blogs").findOne({ _id: new ObjectId(json.blog?._id) });
   await dbusers.collection("blogs").updateOne(
     { _id: reqBlog?._id },
     {
