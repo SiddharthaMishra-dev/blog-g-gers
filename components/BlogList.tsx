@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { Blog } from "@/models/UserModel";
 import noContent from "@/assets/No data-pana.svg";
 import { useBlogStore } from "@/utils/store";
+
 import BlogCard from "./BlogCard";
 
 interface BlogListProps {
