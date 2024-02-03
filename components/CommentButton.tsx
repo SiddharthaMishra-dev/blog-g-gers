@@ -4,10 +4,11 @@ import { useDisclosure } from "@nextui-org/react";
 import { FaRegComment } from "react-icons/fa";
 import CommentModal from "./CommentModal";
 import { Blog } from "@/models/UserModel";
+import type { blogs } from "@prisma/client";
 
 interface CommentButtonProps {
-  blog: Blog;
-  handleComment: (blog: Blog) => void;
+  blog: blogs;
+  handleComment: (blog: blogs) => void;
 }
 
 const CommentButton = ({ blog, handleComment }: CommentButtonProps) => {

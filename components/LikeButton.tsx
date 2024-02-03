@@ -4,10 +4,13 @@ import { Blog } from "@/models/UserModel";
 import { useSession } from "next-auth/react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import type { blogs } from "@prisma/client";
 
 interface LikeButtonProps {
-  blog: Blog;
-  handleLike: (blog: Blog) => void;
+  // blog: Blog;
+  // handleLike: (blog: Blog) => void;
+  blog: blogs;
+  handleLike: (blog: blogs) => void;
 }
 
 const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
