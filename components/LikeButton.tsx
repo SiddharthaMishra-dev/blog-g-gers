@@ -22,6 +22,7 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
     if (!isLiked) {
       setIsLiked(true);
       handleLike(blog);
+      console.log(isLiked);
     }
   };
 

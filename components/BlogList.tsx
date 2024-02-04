@@ -16,7 +16,7 @@ import noContent from "@/assets/No data-pana.svg";
 import { useBlogStore } from "@/utils/store";
 
 import BlogCard from "./BlogCard";
-import { LikeBlog } from "@/actions/actions";
+import { CommentBlog, LikeBlog } from "@/actions/actions";
 
 interface BlogListProps {
   // blogs: Blog[];
@@ -75,26 +75,27 @@ const BlogList = ({ blogs }: BlogListProps) => {
       router.push("/signin");
     } else {
       try {
-        let newBlogs = blogs.map((b: blogs) => {
-          if (b.id === tempBlog.id) {
-            return { ...b, comments: tempBlog.comments };
-          }
-          return b;
-        });
+        // let newBlogs = blogs.map((b: blogs) => {
+        //   if (b.id === tempBlog.id) {
+        //     return { ...b, comments: tempBlog.comments };
+        //   }
+        //   return b;
+        // });
         // blogStore.addBlogs(newBlogs);
-        const form = {
-          session: session,
-          blog: tempBlog,
-        };
-        const response = await fetch("/api/user", {
-          method: "PUT",
-          body: JSON.stringify(form),
-        });
-        if (response.ok) {
-          toast.success("Comment posted!");
-        } else {
-          toast.error("Error posting comment!");
-        }
+        // const form = {
+        //   session: session,
+        //   blog: tempBlog,
+        // };
+        // const response = await fetch("/api/user", {
+        //   method: "PUT",
+        //   body: JSON.stringify(form),
+        // });
+        // if (response.ok) {
+        //   toast.success("Comment posted!");
+        // } else {
+        //   toast.error("Error posting comment!");
+        // }
+        await CommentBlog(tempBlog);
       } catch (err) {
         console.log(err);
         blogStore.addBlogs(blogStore.blogs);

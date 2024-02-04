@@ -10,7 +10,7 @@ export default async function Blogs() {
   // const blogs = await getBlogs();
 
   const allBlogs = await prisma.blogs.findMany();
-  console.log(allBlogs);
+  // console.log(allBlogs);
 
   return (
     <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
