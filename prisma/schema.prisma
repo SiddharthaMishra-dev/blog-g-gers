@@ -33,7 +33,7 @@ model blogs {
 }
 
 model users {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
   email         String
   /// Could not determine type: the field only had null or empty values in the sample set.
   emailVerified Json?
