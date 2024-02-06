@@ -1,71 +1,68 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
 import {
   Button,
   Input,
-  Textarea,
   Modal,
+  ModalBody,
   ModalContent,
   ModalHeader,
-  ModalBody,
+  Textarea,
   useDisclosure,
 } from "@nextui-org/react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import { DeleteBlog, FetchBlog, UpdateBlog } from "@/actions/actions";
 import toast from "react-hot-toast";
-import getBlogById from "@/actions/getBlogById";
 
 const InitialState = {
+  id: "",
   title: "",
   hashtags: "",
   content: "",
-  likes: [],
+  likes: [""],
+  username: "",
 };
 
 const Page = () => {
   const params = useParams();
+  let blogId = params.blogId;
+
   const [formData, setFormData] = useState(InitialState);
   const [deleted, setDeleted] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
   const fetchBlog = async () => {
-    const json = await getBlogById(params.blogId);
-    setFormData({ ...json });
+    const json = await FetchBlog(blogId);
+    setFormData({
+      id: json?.id!,
+      title: json?.title!,
+      hashtags: json?.hashtags!,
+      content: json?.content!,
+      likes: json?.likes!,
+      username: json?.username!,
+    });
   };
 
   const handleSubmit = async () => {
     try {
-      let url = `/api/user/${params.blogId}`;
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const json = await response.json();
+      const resp = await UpdateBlog(formData);
       toast.success("Post successfully published");
     } catch (err) {
       console.log(err);
     }
   };
   const handleDeleteBlog = async () => {
-    const url = `/api/user/${params.blogId}`;
     try {
-      const response = await fetch(url, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-      if (data.status === 1) {
-        router.push(`/protected/${params.user}`, { scroll: false });
-        setDeleted(true);
-      }
+      const resp = await DeleteBlog(params.blogId);
+      router.push(`/protected/${params.user}`, { scroll: false });
+      setDeleted(true);
     } catch (err) {
       console.log(err);
     }
@@ -79,6 +76,7 @@ const Page = () => {
     <>
       <div>
         <Modal
+          className="dark"
           isOpen={isOpen}
           onOpenChange={onOpenChange}
         >

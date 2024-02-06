@@ -20,7 +20,7 @@ import { CommentBlog, LikeBlog } from "@/actions/actions";
 
 interface BlogListProps {
   // blogs: Blog[];
-  blogs: blogs[];
+  blogs: blogs[] | undefined;
 }
 
 const BlogList = ({ blogs }: BlogListProps) => {
@@ -28,7 +28,6 @@ const BlogList = ({ blogs }: BlogListProps) => {
   //  const session = await getServerSession(authOptions);
   const router = useRouter();
   const blogStore = useBlogStore();
-  const prisma = new PrismaClient();
 
   const handleLike = async (tempBlog: blogs) => {
     if (!session) {
@@ -103,7 +102,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
     }
   };
 
-  if (blogs.length === 0) {
+  if (blogs?.length === 0) {
     return (
       <div className="h-full w-full overflow-auto p-4 flex flex-col  items-center">
         <div className="h-full flex flex-col justify-center items-center">
@@ -129,7 +128,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
   return (
     <div className="h-full w-full overflow-y-auto">
       <ul className="w-full p-3">
-        {blogs.map((blog: blogs) => (
+        {blogs?.map((blog: blogs) => (
           <li
             key={blog?.id}
             className="max-w-[700px] mx-auto"

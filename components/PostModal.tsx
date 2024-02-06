@@ -44,10 +44,6 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
     e.preventDefault();
     try {
       setPosting(true);
-      // const response = await fetch("/api/user", {
-      //   method: "POST",
-      //   body: JSON.stringify({ ...formData, session }),
-      // });
       await PostBlog(formData);
       setPosting(false);
       setfunction(true);

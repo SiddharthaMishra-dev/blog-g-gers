@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Provider>
           <div className="h-screen overflow-hidden overflow-y-auto">
             <Appbar />
-            <div className="h-[calc(100vh-75px)]">{children}</div>
+            <div className="h-[calc(100vh-75px)] ">{children}</div>
           </div>
         </Provider>
       </body>

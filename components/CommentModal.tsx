@@ -25,7 +25,7 @@ interface CommentModalProps {
   // isOpen: boolean;
   // onOpenChange: () => void;
   // handleComment: (blog: Blog) => void;
-  blog: UpdatedBlogType;
+  blog: blogs;
   isOpen: boolean;
   onOpenChange: () => void;
   handleComment: (blog: blogs) => void;
@@ -43,7 +43,8 @@ const CommentModal = ({ blog, isOpen, onOpenChange, handleComment }: CommentModa
       let userName = session?.user?.name || "";
       let tempBlog: blogs = {
         ...blog,
-        comments: [...(blog.comments ?? []), { userName, comment }],
+        // comments: [...(blog.comments ?? []), { userName, comment }],
+        comments: { userName, comment },
       };
       handleComment(tempBlog);
       onOpenChange();
