@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="h-full flex flex-col items-center justify-center p-24">
-      <h1 className={` font-black  mb-2 custom-text`}>Blog-g-ers</h1>
-      <h2 className="mt-2 text-4xl text-gray-200"> Share who you are</h2>
+    <main className="h-full flex flex-col items-center justify-center md:p-24 px-10">
+      <h1 className={` font-black   mb-2 custom-text`}>Blog-g-ers</h1>
+      <h2 className="mt-2 text-2xl md:text-4xl text-gray-200"> Share who you are</h2>
       <Link href="/blogs">
         <Button
           color="primary"
