@@ -1,33 +1,33 @@
 "use client";
 
+import { Button, Card, CardBody, CardFooter, CardHeader, useDisclosure } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { Card, CardBody, CardHeader, CardFooter, Button, useDisclosure } from "@nextui-org/react";
-import { FaEdit } from "react-icons/fa";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FaEdit } from "react-icons/fa";
 
-import { Blog } from "@/models/UserModel";
+import { FetchBlogsByUser } from "@/actions/actions";
+import firstBlog from "@/assets/dazzle-blog-post-article.gif";
 import Loader from "@/components/Loader";
 import PostModal from "@/components/PostModal";
-import firstBlog from "@/assets/dazzle-blog-post-article.gif";
+import { blogs } from "@prisma/client";
 
 export default function User() {
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isNewAdded, setIsNewAdded] = useState(false);
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<blogs[]>([]);
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
   const params = useParams();
 
   const fetchBlogs = async () => {
     try {
       setFetchingBlogs(true);
-      const response = await fetch("/api/user");
-      const json = await response.json();
+      const data = await FetchBlogsByUser();
       setFetchingBlogs(false);
-      setBlogs(json);
+      setBlogs(data!);
     } catch (err) {
       console.log(err);
     }
@@ -47,9 +47,9 @@ export default function User() {
       ) : blogs.length !== 0 ? (
         <div>
           <ul className="w-full flex flex-col items-center p-3 mt-7">
-            {blogs.map((blog: Blog) => (
+            {blogs?.map((blog: blogs) => (
               <li
-                key={blog?._id}
+                key={blog?.id}
                 className="mt-5"
               >
                 <Card className="w-[600px] bg-theme  p-4 text-cyan-50 ">
@@ -59,7 +59,7 @@ export default function User() {
                     <Button
                       as={Link}
                       color="primary"
-                      href={`/protected/${params.user}/${blog._id}`}
+                      href={`/protected/${params.user}/${blog.id}`}
                       className="font-semibold"
                     >
                       <FaEdit />

@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model accounts {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  access_token      String
+  expires_at        Int?
+  id_token          String?
+  provider          String
+  providerAccountId String
+  scope             String
+  token_type        String
+  type              String
+  userId            String  @db.ObjectId
+}
+
+model blogs {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  comments Json?
+  content  String
+  hashtags String
+  likes    String[]
+  title    String
+  userId   String   @db.ObjectId
+  username String
+}
+
+model users {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  email         String
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  emailVerified Json?
+  image         String
+  name          String
+}

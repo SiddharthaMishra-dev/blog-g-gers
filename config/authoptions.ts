@@ -1,9 +1,9 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { NextAuthOptions } from "next-auth";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
-import clientPromise from "@/utils/mongoClient";
+import clientPromise from "@/config/mongoClient";
 
 interface AuthOptionProps extends NextAuthOptions {}
 

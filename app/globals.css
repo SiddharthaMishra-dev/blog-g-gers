@@ -53,7 +53,8 @@ body {
   background-clip: border-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 200px;
+  font-size: 10rem;
+  text-wrap: nowrap;
 }
 
 .gradient_blue-dark {
@@ -71,11 +72,11 @@ body {
 
 @media screen and (max-width: 768px) {
   .custom-text {
-    font-size: 140px;
+    font-size: 6rem;
   }
 }
 @media screen and (max-width: 500px) {
   .custom-text {
-    font-size: 100px;
+    font-size: 3rem;
   }
 }

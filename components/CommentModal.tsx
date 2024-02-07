@@ -14,12 +14,21 @@ import {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import type { Prisma, blogs } from "@prisma/client";
+
+type UpdatedBlogType = blogs & {
+  comments: Prisma.JsonArray; // Update this to explicitly specify an array
+};
 
 interface CommentModalProps {
-  blog: Blog;
+  // blog: Blog;
+  // isOpen: boolean;
+  // onOpenChange: () => void;
+  // handleComment: (blog: Blog) => void;
+  blog: blogs;
   isOpen: boolean;
   onOpenChange: () => void;
-  handleComment: (blog: Blog) => void;
+  handleComment: (blog: blogs) => void;
 }
 
 const CommentModal = ({ blog, isOpen, onOpenChange, handleComment }: CommentModalProps) => {
@@ -32,7 +41,11 @@ const CommentModal = ({ blog, isOpen, onOpenChange, handleComment }: CommentModa
     if (comment.length > 0) {
       setPosting(true);
       let userName = session?.user?.name || "";
-      let tempBlog: Blog = { ...blog, comments: [...(blog.comments ?? []), { userName, comment }] };
+      let tempBlog: blogs = {
+        ...blog,
+        // comments: [...(blog.comments ?? []), { userName, comment }],
+        comments: { userName, comment },
+      };
       handleComment(tempBlog);
       onOpenChange();
     } else {

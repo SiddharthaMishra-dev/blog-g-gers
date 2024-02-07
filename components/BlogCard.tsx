@@ -3,11 +3,16 @@ import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
 import { Blog } from "@/models/UserModel";
 import LikeButton from "./LikeButton";
 import CommentButton from "./CommentButton";
+import type { blogs } from "@prisma/client";
 
 interface CardProps {
-  blog: Blog;
-  handleLike: (blog: Blog) => void;
-  handleComment: (blog: Blog) => void;
+  // blog: Blog;
+  // handleLike: (blog: Blog) => void;
+  // handleComment: (blog: Blog) => void;
+
+  blog: blogs;
+  handleLike: (blog: blogs) => void;
+  handleComment: (blog: blogs) => void;
 }
 
 const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {

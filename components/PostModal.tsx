@@ -15,12 +15,14 @@ import {
 } from "@nextui-org/react";
 import { CircularProgress } from "@nextui-org/progress";
 import toast from "react-hot-toast";
+import { PostBlog } from "@/actions/actions";
 
 const InitialState = {
   title: "",
   hashtags: "",
   content: "",
   likes: [],
+  comments: [],
 };
 
 interface PostModalProps {
@@ -42,10 +44,7 @@ export default function PostModal({ isOpen, onOpenChange, setfunction }: PostMod
     e.preventDefault();
     try {
       setPosting(true);
-      const response = await fetch("/api/user", {
-        method: "POST",
-        body: JSON.stringify({ ...formData, session }),
-      });
+      await PostBlog(formData);
       setPosting(false);
       setfunction(true);
       onOpenChange();
