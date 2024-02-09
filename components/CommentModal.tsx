@@ -1,6 +1,5 @@
 "use client";
 
-import { Blog } from "@/models/UserModel";
 import {
   Button,
   Input,
@@ -11,10 +10,10 @@ import {
   ModalHeader,
   Textarea,
 } from "@nextui-org/react";
+import type { Prisma, blogs } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import type { Prisma, blogs } from "@prisma/client";
+import { useState } from "react";
 
 type UpdatedBlogType = blogs & {
   comments: Prisma.JsonArray; // Update this to explicitly specify an array

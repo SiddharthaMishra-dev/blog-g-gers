@@ -5,6 +5,24 @@ import { PrismaClient } from "@prisma/client";
 
 import { authOptions } from "@/config/authoptions";
 import { getServerSession } from "next-auth/next";
+
+interface UpdateBlogProps {
+  id: string;
+  title: string;
+  hashtags: string;
+  content: string;
+  likes: string[];
+  username: string;
+}
+
+interface FormDataProps {
+  title: string;
+  hashtags: string;
+  content: string;
+  likes: string[];
+  comments: string[];
+}
+
 const prisma = new PrismaClient();
 
 export async function FetchAll() {
@@ -94,14 +112,6 @@ export async function CommentBlog(tempBlog: blogs) {
   }
 }
 
-interface FormDataProps {
-  title: string;
-  hashtags: string;
-  content: string;
-  likes: string[];
-  comments: string[];
-}
-
 export async function PostBlog(formData: FormDataProps) {
   const session = await getServerSession(authOptions);
   const usr = await prisma.users.findFirst({
@@ -120,15 +130,6 @@ export async function PostBlog(formData: FormDataProps) {
       username: session?.user?.name!,
     },
   });
-}
-
-interface UpdateBlogProps {
-  id: string;
-  title: string;
-  hashtags: string;
-  content: string;
-  likes: string[];
-  username: string;
 }
 
 export async function UpdateBlog(tempBlog: UpdateBlogProps) {

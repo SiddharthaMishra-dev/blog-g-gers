@@ -1,9 +1,15 @@
 "use client";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import { NextUIProvider } from "@nextui-org/react";
 import { Toaster } from "react-hot-toast";
+import { Session } from "next-auth";
 
-export default function Provider({ children }: any) {
+interface Props {
+  children: React.ReactNode;
+  session?: Session;
+}
+
+export default async function Provider({ children }: Props) {
   return (
     <NextUIProvider>
       <Toaster

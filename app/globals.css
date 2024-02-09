@@ -47,7 +47,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 .custom-text {
-  background: url("../assets/bg.png");
+  background: url("/bg.png");
   background-repeat: no-repeat;
   background-position: center;
   background-clip: border-box;

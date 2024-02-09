@@ -1,15 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Button,
-  Link,
-  useDisclosure,
-} from "@nextui-org/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,10 +8,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSession, signOut } from "next-auth/react";
-import PostModal from "./PostModal";
+import {
+  Button,
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  useDisclosure,
+} from "@nextui-org/react";
+import { signOut, useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { IoMenu } from "react-icons/io5";
+
+const PostModal = dynamic(() => import("./PostModal"));
 
 const Appbar = () => {
   const { data: session } = useSession();
@@ -52,8 +54,8 @@ const Appbar = () => {
               <NavbarItem>
                 <Button
                   onPress={onOpen}
-                  variant="flat"
-                  className="theme-color font-semibold"
+                  variant="light"
+                  className="font-semibold"
                 >
                   Create Post
                 </Button>
@@ -62,8 +64,8 @@ const Appbar = () => {
                 <Button
                   as={Link}
                   href={`/protected/${session.user?.name}`}
-                  variant="flat"
-                  className="theme-color font-semibold"
+                  variant="light"
+                  className=" font-semibold"
                 >
                   Dashboard
                 </Button>
@@ -71,8 +73,8 @@ const Appbar = () => {
               <NavbarItem>
                 <Button
                   as={Link}
-                  color="primary"
-                  variant="flat"
+                  color="danger"
+                  variant="light"
                   onClick={() => signOut({ callbackUrl: "/" })}
                   className="font-semibold text-lg"
                 >
@@ -112,8 +114,8 @@ const Appbar = () => {
           <NavbarItem className="lg:flex">
             <Button
               as={Link}
-              color="primary"
-              variant="flat"
+              // color="primary"
+              variant="light"
               className="font-semibold text-lg"
               href="/signin"
             >

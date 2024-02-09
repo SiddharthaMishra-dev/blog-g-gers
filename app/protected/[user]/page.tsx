@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 import { FetchBlogsByUser } from "@/actions/actions";
-import firstBlog from "@/assets/dazzle-blog-post-article.gif";
 import Loader from "@/components/Loader";
 import PostModal from "@/components/PostModal";
 import { blogs } from "@prisma/client";
@@ -74,7 +73,7 @@ export default function User() {
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
           <Image
-            src={firstBlog}
+            src="/dazzle-blog-post-article.gif"
             alt="first blog"
             height={400}
             width={400}

@@ -32,6 +32,9 @@ dependencies:
   '@types/react-dom':
     specifier: 18.2.7
     version: 18.2.7
+  auth:
+    specifier: ^1.0.2
+    version: 1.0.2
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.27)
@@ -3488,6 +3491,13 @@ packages:
       has-symbols: 1.0.3
     dev: false
 
+  /auth@1.0.2:
+    resolution: {integrity: sha512-mT+SzmDZ0uWeFS4iytIdTPQzENn0ewl+FR7cmhaMvPCK+KpHPvgIa018Jl4b3+x7VKh1C19H4BL9RXy6j3TMqA==}
+    hasBin: true
+    dependencies:
+      commander: 11.1.0
+    dev: false
+
   /autoprefixer@10.4.14(postcss@8.4.27):
     resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -3668,6 +3678,11 @@ packages:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
+    dev: false
+
+  /commander@11.1.0:
+    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
+    engines: {node: '>=16'}
     dev: false
 
   /commander@4.1.1:

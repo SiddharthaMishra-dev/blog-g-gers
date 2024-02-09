@@ -1,10 +1,9 @@
 "use client";
 
-import { Blog } from "@/models/UserModel";
-import { useSession } from "next-auth/react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useEffect, useState } from "react";
 import type { blogs } from "@prisma/client";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 interface LikeButtonProps {
   // blog: Blog;

@@ -1,15 +1,10 @@
-import { Card, CardBody, CardHeader, CardFooter } from "@nextui-org/card";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 
-import { Blog } from "@/models/UserModel";
-import LikeButton from "./LikeButton";
-import CommentButton from "./CommentButton";
 import type { blogs } from "@prisma/client";
+import CommentButton from "./CommentButton";
+import LikeButton from "./LikeButton";
 
 interface CardProps {
-  // blog: Blog;
-  // handleLike: (blog: Blog) => void;
-  // handleComment: (blog: Blog) => void;
-
   blog: blogs;
   handleLike: (blog: blogs) => void;
   handleComment: (blog: blogs) => void;
