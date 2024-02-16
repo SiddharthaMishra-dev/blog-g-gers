@@ -10,7 +10,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "blog-g-gers",
+  title: "blog-g-ers",
   description: "Be yourself",
 };
 

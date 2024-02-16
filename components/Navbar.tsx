@@ -41,7 +41,7 @@ const Appbar = () => {
     >
       <NavbarBrand>
         <Link href="/">
-          <p className="text-xl font-bold text-inherit">blog-g-gers</p>
+          <p className="text-xl font-bold text-inherit">blog-g-ers</p>
         </Link>
       </NavbarBrand>
       <NavbarContent
@@ -119,7 +119,7 @@ const Appbar = () => {
               className="font-semibold text-lg"
               href="/signin"
             >
-              Sign In
+              Sign in
             </Button>
           </NavbarItem>
         )}

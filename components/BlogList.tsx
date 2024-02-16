@@ -91,6 +91,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
               handleLike={handleLike}
               handleComment={handleComment}
             />
+            <div className="border-b" />
           </li>
         ))}
       </ul>

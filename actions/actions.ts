@@ -168,3 +168,16 @@ export async function DeleteBlog(props: string | string[]) {
     console.log(err);
   }
 }
+
+export async function GetUserImage(props: string) {
+  try {
+    const usr = await prisma.users.findFirst({
+      where: {
+        id: props,
+      },
+    });
+    return usr?.image || "";
+  } catch (err) {
+    console.log(err);
+  }
+}

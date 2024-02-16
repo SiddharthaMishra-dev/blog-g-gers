@@ -1,4 +1,3 @@
-// "use client";
 import { FetchAll } from "@/actions/actions";
 import BlogList from "@/components/BlogList";
 
