@@ -6,8 +6,6 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import { getServerSession } from "next-auth/next";
-// import { authOptions } from "@/config/authoptions";
 
 import { useBlogStore } from "@/utils/store";
 
