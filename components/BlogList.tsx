@@ -43,7 +43,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
       router.push("/signin");
     } else {
       try {
-        await CommentBlog(tempBlog);
+        const resp = await CommentBlog(tempBlog);
       } catch (err) {
         console.log(err);
         blogStore.addBlogs(blogStore.blogs);

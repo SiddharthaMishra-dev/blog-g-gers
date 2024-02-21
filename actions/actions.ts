@@ -1,6 +1,6 @@
 "use server";
 
-import type { blogs } from "@prisma/client";
+import type { Prisma, blogs } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 
 import { authOptions } from "@/config/authoptions";
@@ -93,7 +93,14 @@ export async function LikeBlog(tempBlog: blogs) {
 
 export async function CommentBlog(tempBlog: blogs) {
   const session = await getServerSession(authOptions);
-  console.log(tempBlog);
+  const resp = await prisma.blogs.findFirst({
+    where: {
+      id: tempBlog.id,
+    },
+  });
+
+  const prevComments = resp?.comments as Prisma.JsonArray;
+  const newComments = [...prevComments, tempBlog.comments];
 
   try {
     const resp = await prisma.blogs.update({
@@ -101,9 +108,7 @@ export async function CommentBlog(tempBlog: blogs) {
         id: tempBlog.id,
       },
       data: {
-        comments: {
-          push: tempBlog.comments,
-        },
+        comments: newComments,
       },
     });
     return resp;
