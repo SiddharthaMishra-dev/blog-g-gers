@@ -77,7 +77,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
   }
 
   return (
-    <div className="h-full w-full overflow-y-auto">
+    <div className="h-full w-full ">
       <ul className="w-full p-3">
         {blogs?.map((blog: blogs) => (
           <li

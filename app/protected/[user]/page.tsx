@@ -13,9 +13,10 @@ import Loader from "@/components/Loader";
 import PostModal from "@/components/PostModal";
 import { blogs } from "@prisma/client";
 
-export default function User() {
+export default async function User() {
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isMounted, setIsMounted] = useState(false);
   const [isNewAdded, setIsNewAdded] = useState(false);
   const [blogs, setBlogs] = useState<blogs[]>([]);
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
@@ -28,6 +29,7 @@ export default function User() {
       setFetchingBlogs(false);
       setBlogs(data!);
     } catch (err) {
+      setFetchingBlogs(false);
       console.log(err);
     }
   };
@@ -43,7 +45,7 @@ export default function User() {
         <div>
           <Loader />
         </div>
-      ) : blogs.length !== 0 ? (
+      ) : blogs?.length !== 0 ? (
         <div>
           <ul className="w-full flex flex-col items-center p-3 mt-7">
             {blogs?.map((blog: blogs) => (
