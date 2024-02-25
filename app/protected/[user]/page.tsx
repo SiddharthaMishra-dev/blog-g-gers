@@ -13,10 +13,9 @@ import Loader from "@/components/Loader";
 import PostModal from "@/components/PostModal";
 import { blogs } from "@prisma/client";
 
-export default async function User() {
+export default function User() {
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [isMounted, setIsMounted] = useState(false);
   const [isNewAdded, setIsNewAdded] = useState(false);
   const [blogs, setBlogs] = useState<blogs[]>([]);
   const [fetchingBlogs, setFetchingBlogs] = useState(false);
