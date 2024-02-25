@@ -14,14 +14,11 @@ const Page = () => {
   useEffect(() => {
     if (session) {
       toast.success("Logged in successfully");
-      router.refresh();
       router.push(`/`);
     }
   }, [session]);
   return (
     <>
-      {/* New Design */}
-
       <div className="h-full w-full p-6 ">
         <div className="h-full flex gap-x-4 ">
           <div className="hidden md:block w-[786px] bg-background bg-center rounded-s-lg drop-shadow-md bg-blue-700/90 bg-blend-multiply blur-sm"></div>
@@ -34,7 +31,6 @@ const Page = () => {
                 <CardHeader></CardHeader>
                 <CardBody className="">
                   <Button
-                    // data-target="blured-element"
                     color="primary"
                     size="lg"
                     onClick={() => signIn("github")}

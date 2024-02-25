@@ -28,6 +28,7 @@ export default function User() {
       setFetchingBlogs(false);
       setBlogs(data!);
     } catch (err) {
+      setFetchingBlogs(false);
       console.log(err);
     }
   };
@@ -43,7 +44,7 @@ export default function User() {
         <div>
           <Loader />
         </div>
-      ) : blogs.length !== 0 ? (
+      ) : blogs?.length !== 0 ? (
         <div>
           <ul className="w-full flex flex-col items-center p-3 mt-7">
             {blogs?.map((blog: blogs) => (
