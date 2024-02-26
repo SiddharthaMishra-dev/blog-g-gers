@@ -9,7 +9,7 @@ interface Props {
   session?: Session;
 }
 
-export default async function Provider({ children }: Props) {
+export default function Provider({ children }: Props) {
   return (
     <NextUIProvider>
       <Toaster

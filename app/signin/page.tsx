@@ -11,12 +11,24 @@ const Page = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
+  const handleSignIn = async (provider: string) => {
+    try {
+      await signIn(provider);
+      // Redirect to home page after sign-in
+      router.push("/");
+      toast.success("Logged in successfully");
+    } catch (error) {
+      toast.error("Sign in failed");
+      console.error("Sign in error:", error);
+    }
+  };
+
   useEffect(() => {
     if (session) {
-      toast.success("Logged in successfully");
       router.push(`/`);
+      toast.success("Logged in successfully");
     }
-  }, [session]);
+  }, [session, router]);
   return (
     <>
       <div className="h-full w-full p-6 ">
@@ -33,7 +45,7 @@ const Page = () => {
                   <Button
                     color="primary"
                     size="lg"
-                    onClick={() => signIn("github")}
+                    onClick={() => handleSignIn("github")}
                   >
                     <FaGithub className="text-lg" />
                     <span className="font-bold">Continue with Github</span>
@@ -42,7 +54,7 @@ const Page = () => {
                     color="primary"
                     className="mt-4"
                     size="lg"
-                    onClick={() => signIn("google")}
+                    onClick={() => handleSignIn("google")}
                   >
                     <FaGoogle className="text-lg" />
                     <span className="font-bold">Continue with Google</span>

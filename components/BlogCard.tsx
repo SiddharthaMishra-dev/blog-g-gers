@@ -5,6 +5,7 @@ import CommentButton from "./CommentButton";
 import LikeButton from "./LikeButton";
 import { useEffect, useState } from "react";
 import { GetUserImage } from "@/actions/actions";
+import Image from "next/image";
 
 interface CardProps {
   blog: blogs;
@@ -28,11 +29,14 @@ const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {
     <>
       <Card className="w-full p-2 m-4 bg-theme text-cyan-50 font-semibold  drop-shadow-2xl bg-transparent">
         <div className="flex space-x-2">
-          <img
-            className="h-10 w-10 rounded-full"
-            src={image}
-            alt="profile"
-          />
+          <div className="relative h-10 w-10">
+            <Image
+              fill
+              className="rounded-full object-center object-cover"
+              src={image}
+              alt="profile"
+            />
+          </div>
           <div>
             <CardHeader className=" px-3 pt-0">
               <div className="flex flex-col">
