@@ -1,22 +1,22 @@
 "use client";
-import { useSession, signIn } from "next-auth/react";
-import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Button } from "@nextui-org/button";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import Loading from "./loading";
+import { useEffect, useState } from "react";
 
 const Page = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const router = useRouter();
 
   const handleSignIn = async (provider: string) => {
     try {
       await signIn(provider);
-      // Redirect to home page after sign-in
-      router.push("/");
-      toast.success("Logged in successfully");
     } catch (error) {
       toast.error("Sign in failed");
       console.error("Sign in error:", error);
@@ -24,11 +24,17 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (session) {
-      router.push(`/`);
-      toast.success("Logged in successfully");
+    if (session && !isLoggedIn) {
+      setIsLoggedIn(true);
+      toast.success("Logged In");
+      router.push("/");
     }
-  }, [session, router]);
+  }, [session, isLoggedIn]);
+
+  if (status === "loading") {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className="h-full w-full p-6 ">
