@@ -14,14 +14,14 @@ interface LikeButtonProps {
 
 const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
   const [isLiked, setIsLiked] = useState(false);
-
+  const [optimisticLike, setOptimisticLike] = useState(0);
   const { data: session } = useSession();
 
-  const likeFn = () => {
+  const likeFn = (e: Event) => {
     if (!isLiked) {
       setIsLiked(true);
+      setOptimisticLike(1);
       handleLike(blog);
-      console.log(isLiked);
     }
   };
 
@@ -38,13 +38,13 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
   return (
-    <div className="flex items-center hover:text-red-600 transition cursor-pointer">
+    <div className="group flex items-center hover:text-red-600 transition cursor-pointer">
       <Icon
         onClick={likeFn}
         size={20}
         color={isLiked ? "red" : "white"}
       />
-      <span className="ml-2">{blog?.likes.length}</span>
+      <span className="ml-2">{blog?.likes.length + optimisticLike}</span>
     </div>
   );
 };

@@ -73,6 +73,14 @@ export async function FetchBlogsByUser() {
 
 export async function LikeBlog(tempBlog: blogs) {
   const session = await getServerSession(authOptions);
+  const resp = await prisma.blogs.findFirst({
+    where: {
+      id: tempBlog.id,
+    },
+  });
+
+  const prevLikes = resp?.likes ?? [];
+  prevLikes.push(session?.user?.email! ?? "");
 
   try {
     const resp = await prisma.blogs.update({
@@ -80,9 +88,7 @@ export async function LikeBlog(tempBlog: blogs) {
         id: tempBlog.id,
       },
       data: {
-        likes: {
-          push: session?.user?.email || "",
-        },
+        likes: prevLikes,
       },
     });
     return resp;

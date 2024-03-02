@@ -6,6 +6,7 @@ import LikeButton from "./LikeButton";
 import { useEffect, useState } from "react";
 import { GetUserImage } from "@/actions/actions";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CardProps {
   blog: blogs;
@@ -37,14 +38,16 @@ const BlogCard = ({ blog, handleLike, handleComment }: CardProps) => {
               alt="profile"
             />
           </div>
-          <div>
-            <CardHeader className=" px-3 pt-0">
-              <div className="flex flex-col">
-                <span className="text-2xl">{blog.username}</span>
-                <span className="text-xl text-gray-200">{blog.title}</span>
-              </div>
-            </CardHeader>
-            <CardBody className="px-3 py-2">{blog.content}</CardBody>
+          <div className="flex-1">
+            <Link href={`/blogs/${blog.id}`}>
+              <CardHeader className=" px-3 pt-0">
+                <div className="flex flex-col gap-y-2">
+                  <span className="text-2xl">{blog.username}</span>
+                  <span className="text-xl text-gray-300">{blog.title}</span>
+                </div>
+              </CardHeader>
+              <CardBody className="px-3 py-2">{blog.content}</CardBody>
+            </Link>
             <CardFooter className="p-4 flex justify-between items-center">
               <div className="flex justify-center items-center gap-x-6">
                 <LikeButton

@@ -102,7 +102,7 @@ const Appbar = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => signOut({ callbackUrl: "/" })}
-                    className="text-red-400 font-semibold text-md"
+                    className="text-red-400"
                   >
                     Log out
                   </DropdownMenuItem>

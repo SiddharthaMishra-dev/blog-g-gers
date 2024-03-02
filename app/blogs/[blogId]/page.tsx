@@ -3,8 +3,11 @@
 import { useParams } from "next/navigation";
 import React from "react";
 
+interface BlogIDProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
 const Page = () => {
-  const params = useParams();
   return (
     <div>
       <h1>Blogs id</h1>
