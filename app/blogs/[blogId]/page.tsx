@@ -4,12 +4,18 @@ import { FetchBlog, GetUserImage } from "@/actions/actions";
 import { blogs } from "@prisma/client";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+interface CommentProp {
+  comment: string;
+  userName: string;
+}
 
 const Page = () => {
   const { blogId } = useParams();
   const [blog, setBlog] = useState<blogs | undefined | null>();
   const [image, setImage] = useState("");
+  const [comments, setComments] = useState<CommentProp[] | undefined>([]);
 
   const fetchImage = async () => {
     const image = await GetUserImage(blog?.userId!);
@@ -18,6 +24,8 @@ const Page = () => {
 
   const fetchBlog = async () => {
     const blog = await FetchBlog(blogId);
+    const comment = blog?.comments as CommentProp[] | undefined;
+    setComments(comment);
     setBlog(blog);
   };
 
@@ -47,8 +55,20 @@ const Page = () => {
             <p className="text-xl font-medium">{blog?.title}</p>
           </div>
         </div>
-        <div className="w-full mt-4 p-3 bg-gray-800 rounded-md">{blog?.content}</div>
-        <div className="w-full mt-4"></div>
+        <div className="w-full mt-4 px-3 py-7 bg-gray-800 rounded-md">{blog?.content}</div>
+        <div className="w-full mt-4 border-t ">
+          <div className="flex flex-col justify-center">
+            {comments?.map((cmt, index) => (
+              <div
+                key={index}
+                className="px-2 py-5 border-b border-gray-600"
+              >
+                <p className="mb-5 text-sm font-medium tracking-wider">{cmt.userName}</p>
+                <p>{cmt.comment}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
