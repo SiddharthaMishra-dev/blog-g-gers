@@ -55,7 +55,7 @@ const Page = () => {
             <p className="text-xl font-medium">{blog?.title}</p>
           </div>
         </div>
-        <div className="w-full mt-4 px-3 py-7 bg-gray-800 rounded-md">{blog?.content}</div>
+        <div className="w-full mt-4 px-3 py-7  rounded-md">{blog?.content}</div>
         <div className="w-full mt-4 border-t ">
           <div className="flex flex-col justify-center">
             {comments?.map((cmt, index) => (
