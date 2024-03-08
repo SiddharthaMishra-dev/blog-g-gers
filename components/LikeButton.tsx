@@ -21,6 +21,7 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
     if (!isLiked) {
       setIsLiked(true);
       setOptimisticLike(1);
+
       handleLike(blog);
     }
   };
@@ -38,13 +39,16 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
   return (
-    <div className="group flex items-center hover:text-red-600 transition cursor-pointer">
+    <div className="group flex items-center hover:text-red-500 transition cursor-pointer text-gray-400">
       <Icon
         onClick={likeFn}
         size={20}
-        color={isLiked ? "red" : "white"}
+        // color={isLiked ? "red" : "white"}
+        className={`hover:text-red-500 ${isLiked ? "text-red-500" : ""}`}
       />
-      <span className="ml-2">{blog?.likes.length + optimisticLike}</span>
+      <span className="ml-2 text-sm">
+        {blog?.likes.length + optimisticLike !== 0 ? blog?.likes.length + optimisticLike : null}
+      </span>
     </div>
   );
 };

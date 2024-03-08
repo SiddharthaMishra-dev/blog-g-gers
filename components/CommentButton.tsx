@@ -17,7 +17,7 @@ const CommentButton = ({ blog, handleComment }: CommentButtonProps) => {
 
   return (
     <>
-      <div className="flex items-center justify-center hover:text-blue-500 transition cursor-pointer">
+      <div className="flex items-center justify-center hover:text-blue-500 transition cursor-pointer text-gray-400">
         <FaRegComment onClick={onOpen} />
         <span className="ml-2">{blogsLength.length > 0 ? blogsLength.length : ""}</span>
       </div>
