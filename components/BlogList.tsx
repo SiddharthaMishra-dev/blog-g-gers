@@ -6,9 +6,6 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-import { useBlogStore } from "@/utils/store";
-
 import { CommentBlog, LikeBlog } from "@/actions/actions";
 import BlogCard from "./BlogCard";
 
@@ -21,20 +18,18 @@ const BlogList = ({ blogs }: BlogListProps) => {
   const { data: session } = useSession();
   //  const session = await getServerSession(authOptions);
   const router = useRouter();
-  const blogStore = useBlogStore();
 
   const handleLike = async (tempBlog: blogs) => {
     if (!session) {
       router.push("/signin");
       return;
     }
-
     try {
       const resp = LikeBlog(tempBlog);
       console.log(resp);
     } catch (err) {
       console.log(err);
-      blogStore.addBlogs(blogStore.blogs);
+      // blogStore.addBlogs(blogStore.blogs);
     }
   };
 
@@ -46,7 +41,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
         const resp = await CommentBlog(tempBlog);
       } catch (err) {
         console.log(err);
-        blogStore.addBlogs(blogStore.blogs);
+        // blogStore.addBlogs(blogStore.blogs);
       }
     }
   };
@@ -79,7 +74,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
   return (
     <div className="h-full w-full ">
       <ul className="w-full p-3">
-        {blogs?.map((blog: blogs) => (
+        {blogs?.map((blog: blogs, index) => (
           <li
             key={blog?.id}
             className="max-w-[700px] mx-auto"
@@ -89,7 +84,7 @@ const BlogList = ({ blogs }: BlogListProps) => {
               handleLike={handleLike}
               handleComment={handleComment}
             />
-            <div className="border-b" />
+            {index !== blogs.length - 1 && <div className="border-b" />}
           </li>
         ))}
       </ul>

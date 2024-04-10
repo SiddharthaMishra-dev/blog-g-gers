@@ -2,6 +2,7 @@
 
 import type { blogs } from "@prisma/client";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
@@ -16,13 +17,18 @@ const LikeButton = ({ blog, handleLike }: LikeButtonProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [optimisticLike, setOptimisticLike] = useState(0);
   const { data: session } = useSession();
+  const router = useRouter();
 
   const likeFn = (e: Event) => {
-    if (!isLiked) {
-      setIsLiked(true);
-      setOptimisticLike(1);
-
-      handleLike(blog);
+    if (!session) {
+      router.push("/signin");
+      return;
+    } else {
+      if (!isLiked) {
+        setIsLiked(true);
+        setOptimisticLike(1);
+        handleLike(blog);
+      }
     }
   };
 
