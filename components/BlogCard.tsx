@@ -1,12 +1,12 @@
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 
-import type { blogs } from "@prisma/client";
-import CommentButton from "./CommentButton";
-import LikeButton from "./LikeButton";
-import { useEffect, useState } from "react";
 import { GetUserImage } from "@/actions/actions";
+import type { blogs } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import CommentButton from "./CommentButton";
+import LikeButton from "./LikeButton";
 
 interface CardProps {
   blog: blogs;
