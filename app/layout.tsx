@@ -5,7 +5,7 @@ import Provider from "./Provider";
 import "./globals.css";
 
 const roboto = Roboto({
-  weight: "400",
+  weight: ["400", "700", "900"],
   subsets: ["latin"],
 });
 
